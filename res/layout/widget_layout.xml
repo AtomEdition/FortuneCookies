@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="@dimen/widget_padding" android:id="@+id/widget_layout">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@id/animation_widget"/>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@id/image_widget"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Medium Text"
+            android:id="@id/text_widget"
+            android:gravity="center" android:layout_centerInParent="true"
+            android:lineSpacingMultiplier="0.8" android:paddingRight="@dimen/prophecy_text_padding_right"
+            android:textColor="@android:color/black" android:textSize="19sp"
+            android:textStyle="italic"/>
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView android:layout_width="@dimen/row_history_category" android:layout_height="@dimen/row_history_category"
+               android:id="@+id/row_history_category" android:layout_margin="@dimen/row_history_margin"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@id/row_history_prophecy"
+            android:layout_marginLeft="@dimen/row_history_margin" android:layout_alignParentBottom="false"
+            style="@style/RowHistoryProphecyText"
+            android:layout_toRightOf="@+id/row_history_category"/>
+    
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@id/row_history_date"
+            android:layout_marginLeft="@dimen/row_history_margin" android:layout_alignParentBottom="false"
+            android:layout_below="@id/row_history_prophecy" style="@style/RowHistoryDateText"
+            android:layout_toRightOf="@+id/row_history_category"/>
+</RelativeLayout>

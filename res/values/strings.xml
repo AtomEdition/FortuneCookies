@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fortune Cookies</string>
+    <string name="follow">Subscribe, buddy!</string>
+    <string name="widget_name">Cookie widget</string>
+    <string name="shake_allow">Shake device to get cookies!</string>
+    <string name="shake_deny">Error happens while connecting to your accelerometer</string>
+    <string name="shake_success">Yeah baby! It works!</string>
+    <string name="calibrate_start">Shake device to calibrate or tap screen to set default value</string>
+    <string name="calibrate_success">Calibration completed! Shake more to get cookies!</string>
+    <string name="connection_failure">Something goes wrong. Check your Internet connection</string>
+    <string name="cookies_ready">Cookies are ready!</string>
+    <string name="button_back">Back</string>
+    <!--> SETTINGS <-->
+    <string name="settings_calibrate">Calibrate</string>
+    <string name="settings_about">About cookies</string>
+    <!--> TUTORIAL <-->
+    <string name="tutorial_shake">Shake</string>
+    <string name="tutorial_choose">Choose one</string>
+    <string name="tutorial_crack">Tap it</string>
+    <string name="tutorial_move_out">Move halves aside</string>
+    <string name="tutorial_zoom">Tap paper to zoom</string>
+    <string name="tutorial_last">Next prophecy will be able after 4 hours</string>
+    <!--> ABOUT <-->
+    <string name="about_text_0">Random prophecies</string>
+    <string name="about_text_1">Money prophecies</string>
+    <string name="about_text_2">Warnings</string>
+    <string name="about_text_3">Love prophecies</string>
+    <string name="about_text_4">Success prophecies</string>
+    <!--> MONEY <-->
+    <string-array name="prophecies_1">
+        <item>Today is a good day to spend money.</item>
+        <item>Savings may increase, but do not play poker.</item>
+        <item>There is a chance of winning the lottery.. all who plays has it..</item>
+        <item>A great day for a treasure hunt .</item>
+        <item>Invest in the oil industry.. or do not invest.</item>
+        <item>The best investment - an investment in pleasure. :)</item>
+        <item>Start saving money.</item>
+        <item>Make paper airplanes and launch them - they will bring someone money.</item>
+        <item>Be compliant</item>
+        <item>Avoid the temptation</item>
+        <item>Think about your costs</item>
+        <item>You save too much</item>
+        <item>The harder you work, the richer you will become</item>
+        <item>You are able to earn and save money - do it!</item>
+        <item>You will be successful in your work</item>
+        <item>Mountains of gold waiting for you! But the dragon guarding them..</item>
+        <item>Good day to spend money.</item>
+        <item>You will inherit a lot of money !</item>
+        <item>Soon you will get a chance to become a great man</item>
+        <item>You must do what you can do</item>
+        <item>Your success will surprise everyone!</item>
+        <item>Your best tool for extracting money - your mind!</item>
+        <item>New dating beneficial impact on your income</item>
+        <item>Money, money, money must be funny…”  (*o *)</item>
+        <item>Plan your spending to increase revenues</item>
+        <item>Remember - money is only a means, not a goal!</item>
+        <item>Every woodcutter has his own axe. Where is yours?</item>
+        <item>Take another look at your life and you will find reduntant</item>
+        <item>Ready to action today</item>
+    </string-array>
+    <!--> WARNINGS <-->
+    <string-array name="prophecies_2">
+        <item>Beware bananas!</item>
+        <item>Avoid contacts with unknown baskets!</item>
+        <item>Do not trust anyone. Especially giraffes!</item>
+        <item>Deny all offers to fly into black hole!</item>
+        <item>Careful on the roads.</item>
+        <item>Be polite with others.</item>
+        <item>Beware the Black.. Cats.</item>
+        <item>Be vigilant - KGB spies everywhere.</item>
+        <item>Avoid noisy companies.</item>
+        <item>Avoid conflicts.</item>
+        <item>Be careful with utensils.</item>
+        <item>Be careful when you hammer a nail, always..</item>
+        <item>Check your health.</item>
+        <item>Afraid butterflies.. Caterpillars do not change in the soul..</item>
+        <item>Good luck, you were looking for was in the other cookies</item>
+        <item>The worst thing in aging, is the smell..</item>
+        <item>Be careful! You can be deceived today.</item>
+        <item>Do not scare your eloquence of others - be easier. ^^</item>
+        <item>Watch out! You will find a wonderful day!</item>
+        <item>Soon your wishes will come true!</item>
+        <item>Give attention to an old friend.</item>
+        <item>You should think about the future.</item>
+        <item>Soon life will be more interesting! Eeeeee.. ^^</item>
+        <item>Doubtful one can be the enemy in camouflage.</item>
+        <item>True friendship just need time, not money.</item>
+        <item>If you like challenges - like the consequences.</item>
+        <item>You must be willing to take responsibility for your actions.</item>
+        <item>You will always be surrounded by true friends, if you will cherish them.</item>
+        <item>You will be accompanied by good luck in all your endeavors.</item>
+        <item>Do not bite dogs today. And tomorrow too…</item>
+        <item>Seven times to cut and the sausage will end</item>
+        <item>If the falling star grow bigger - run!</item>
+        <item>Stop peck people and your beak will be gone</item>
+        <item>If you will make iron red-hot, it will become fragile</item>
+        <item>Dont mess with a beaver!</item>
+    </string-array>
+    <!--> LOVE <-->
+    <string-array name="prophecies_3">
+        <item>Be careful with kisses! They may be very hot ^^</item>
+        <item>Be prepared for the unexpected kiss!</item>
+        <item>More chances to meet your soul mate.</item>
+        <item>Expand your feelings, if they are absent - encroach cookies.</item>
+        <item>You will find a love at first sight.</item>
+        <item>Fabulous success awaits you - look around!</item>
+        <item>You will live your life with a man (or woman) of your dreams.</item>
+        <item>You will find a surprise kiss in an unexpected place.</item>
+        <item>Luck smile upon you, if you will love one person.</item>
+        <item>Love is everywhere! ^^</item>
+        <item>You attract a lot of people - carefully, handsome! :)</item>
+        <item>Love guides you in a new direction.</item>
+        <item>Be friendly with a counter.</item>
+        <item>You have the power to write your own destiny.</item>
+        <item>Tudu - duu-duu -duu.. Tudu du.. Tuuuuu, du! (^ o ^)</item>
+        <item>You will find your ideal. However, perhaps this person will be a dwarf. </item>
+        <item>Look for your love even in dreams!</item>
+        <item>Be humble, and people reach you if you will have a yacht</item>
+        <item>Your manners costs more than jewels</item>
+        <item>You depend on your second half.. and this is good. ^^</item>
+        <item>Your ideal is within your reach!</item>
+        <item>Your infinite patience will be rewarded sooner or later.</item>
+        <item>Wait for the arrival of unrequited love.</item>
+        <item>Your family life will be full of happiness and borsch.</item>
+        <item>Your mind  is the strongest love narcotic!</item>
+        <item>Think before catch hot stuff!</item>
+        <item>If you want hear fortune is knocking at your door just fix your bell</item>
+        <item>It is not over yet. Just wait a bit</item>
+        <item>Look straight - people do not like chameleons</item>
+        <item>Love bites only when you keep it aside</item>
+        <item>Stronger than tea could be only hugs ^^</item>
+        <item>Best moment of your life can happen anytime - be ready!</item>
+        <item>Do not lick everything when you have a candy</item>
+        <item>Best love declarations are spontaneous^^</item>
+        <item>Do not check for a strength your relationships</item>
+        <item>Let go all your sorrows as fast as you can</item>
+        <item>You are not a fish, so just talk what you thinking about!</item>
+    </string-array>
+    <!--> SUCCESS <-->
+    <string-array name="prophecies_4">
+        <item>Risk is for the optimists!</item>
+        <item>No pain - no gain.</item>
+        <item>Keep your faith and dreams will come true.</item>
+        <item>Stop thinking – start doing!</item>
+        <item>Stay at your way!</item>
+        <item>Take a rest - you deserve it.</item>
+        <item>Happiness right before you.</item>
+        <item>To achieve success you need to refrain. But dont forget about toilet!</item>
+        <item>Catch something up! Immediately! Or drink a cup of tea</item>
+        <item>Your boss think bad about you – strike back!</item>
+        <item>Success awaits, stars smiles to you</item>
+        <item>Life is a fairytale</item>
+        <item>Surprises in all capitals of the world!</item>
+        <item>The way to your dream is open!</item>
+        <item>You are lucky! So be patient and stop take lucky tickets</item>
+        <item>Take a look asides when you cross the road - the faith is near.</item>
+        <item>Today is the best day! Such as another ones!</item>
+        <item>A sharp turn is near!</item>
+        <item>At first take care about yourself, then about another ones</item>-
+        <item>Your plans can be hard to be realised, but it worth it!</item>-
+        <item>Be thankful even if your life is not ideal</item>-
+        <item>Your talent will be cracked as a nut, but you will succeed!</item>
+        <item>Endure little less, and your problems will go away</item>
+        <item>If possibilities dont knock at your life, you need to make a door</item>
+        <item>Love and success step forward side by side! To the depths…</item>
+        <item>Your own mistakes make you smarter. And today you will get a lot of knowledge.</item>
+        <item>If you are happy, you are successful too!</item>
+        <item>To find success find yourself first</item>
+        <item>You need to make right solution – dragons are near!</item>
+        <item>Inspiration is near, and success with it!</item>
+        <item>If you like cookies, you will be successful!^^</item>
+        <item>Try something new - it will help you in your goals</item>
+        <item>Focus. If you can not do this - change camera</item>
+        <item>If the sea is calm it is time to row</item>
+        <item>If your glass is empty it is a time to fill it</item>
+        <item>Stop think much, you can go crazy</item>
+        <item>If you want to get inside, you have to twist off a cap</item>
+        <item>Make yourself want do your job</item>
+        <item>Think about learning new language</item>
+        <item>Dont look for happiness in main - watch closer to the trifles</item>
+        <item>Watch your steps while climbing to the top</item>
+        <item>Bananas, blackberries, strawberries, ice-cream, chocolate…</item>
+        <item>Hold your knowledge, but do not use glow</item>
+        <item>Man has no wings, but he has arms - use them to fly</item>
+    </string-array>
+    <string-array name="prophecies_5">
+        <item>Make yourself up after sleep! Dont like – dont sleep!</item>
+        <item>Stop smoking! No smoking - no stoping…</item>
+        <item>You need to change your ration</item>
+        <item>Pricking things are better not to be swallowed.</item>
+        <item>You need a good rest</item>
+        <item>Cottage cheese, kefir, meat, buckwheat…</item>
+        <item>Protein, protein, protein, protein…</item>
+        <item>Remember to brush your teeth, you are not a shark^^</item>
+        <item>More seafood</item>
+        <item>It is never too late for a diet!</item>
+        <item>Go for a walk</item>
+        <item>More walk</item>
+        <item>Take a fresh breath</item>
+        <item>Sport is not for everyone, but exactly for you!</item>
+        <item>Healthy glow still nobody harmed!</item>
+        <item>Smoking - health breaking!</item>
+        <item>Late to grow slim for a summer? New Year awaits!</item>
+        <item>The bigger the body - then louder it falls. But running is not bad anywhere</item>
+        <item>Fall down and wrung!</item>
+        <item>Fingers do not have muscles, stop clicking!</item>
+    </string-array>
+</resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/main_layout"
+            android:layout_marginTop="@dimen/layout_main_margin"
+            android:layout_marginBottom="@dimen/layout_main_margin" android:background="@drawable/background0">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/text_cooldown"
+                android:layout_alignParentTop="false" android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/cooldown_margin" android:layout_alignParentBottom="true"
+                style="@style/TimerText"/>
+        <ImageButton
+                android:layout_width="@dimen/cookie_size"
+                android:layout_height="@dimen/cookie_size"
+                android:id="@id/cookie_0" android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" android:onClick="onCookieClick"/>
+        <ImageButton android:layout_width="@dimen/cookie_size" android:layout_height="@dimen/cookie_size" android:id="@id/cookie_1"
+                     android:layout_alignParentTop="true"
+                     android:onClick="onCookieClick" android:layout_alignParentLeft="true"
+                />
+        <ImageButton android:layout_width="@dimen/cookie_size" android:layout_height="@dimen/cookie_size" android:id="@id/cookie_2"
+                     android:layout_alignParentTop="true"
+                     android:onClick="onCookieClick" android:layout_alignParentLeft="true"
+                />
+        <ImageButton android:layout_width="@dimen/cookie_size" android:layout_height="@dimen/cookie_size" android:id="@id/cookie_3"
+                     android:layout_alignParentTop="true"
+                     android:onClick="onCookieClick" android:layout_alignParentLeft="true"
+                />
+        <ImageButton android:layout_width="@dimen/cookie_size" android:layout_height="@dimen/cookie_size" android:id="@id/cookie_4"
+                     android:onClick="onCookieClick" android:layout_alignParentTop="true"
+                     android:layout_alignParentLeft="true"/>
+        <ImageView
+                android:layout_width="@dimen/crumbs_size"
+                android:layout_height="@dimen/crumbs_size"
+                android:id="@id/image_crumbs" android:layout_centerInParent="true"/>
+        <FrameLayout
+                android:id="@id/prophecy_layout"
+                android:layout_width="@dimen/prophecy_layout_size"
+                android:layout_height="@dimen/prophecy_layout_size_half"
+                android:layout_alignParentTop="false" android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="false" android:layout_alignParentRight="false"
+                android:layout_centerInParent="true">
+            <ImageButton android:layout_width="@dimen/prophecy_image_size" android:layout_height="@dimen/prophecy_image_size_half"
+                         android:id="@id/prophecy" android:onClick="onProphecyClick"
+                         android:visibility="visible" android:layout_gravity="center_horizontal"
+                         android:layout_marginTop="@dimen/prophecy_image_margin_top"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@id/prophecy_text"
+                    android:textColor="@android:color/black" android:gravity="center"
+                    android:visibility="visible"
+                    android:lineSpacingMultiplier="0.6"
+                    android:layout_gravity="center" android:paddingRight="@dimen/prophecy_text_padding_right"
+                    android:textSize="17sp" android:layout_marginTop="@dimen/prophecy_text_margin_top"/>
+        </FrameLayout>
+        <ImageButton android:layout_width="@dimen/cookie_size_half" android:layout_height="@dimen/cookie_size"
+                     android:id="@id/cookie_half_left"
+                     android:visibility="visible"
+                     android:layout_alignLeft="@id/cookie_final" android:layout_alignTop="@id/cookie_final"
+                     android:longClickable="false"/>
+        <ImageButton android:layout_width="@dimen/cookie_size_half" android:layout_height="@dimen/cookie_size"
+                     android:id="@id/cookie_half_right" android:visibility="visible"
+                     android:layout_alignTop="@id/cookie_final" android:layout_alignRight="@id/cookie_final"/>
+        <ImageButton android:layout_width="@dimen/cookie_size" android:layout_height="@dimen/cookie_size" android:id="@id/cookie_final"
+                     android:onClick="onCookieFinalClick"
+                     android:layout_centerInParent="true" android:visibility="visible"/>
+        <ImageButton android:layout_width="@dimen/button_history_size" android:layout_height="@dimen/button_history_size"
+                     android:id="@id/button_settings" android:onClick="onButtonSettingsClick"
+                     android:background="@drawable/settings"
+                     android:layout_alignParentBottom="true" android:layout_toLeftOf="@id/button_history"
+                     android:layout_marginRight="@dimen/button_history_margin"
+                     android:layout_marginBottom="@dimen/button_history_margin"/>
+        <ImageButton android:layout_width="@dimen/button_history_size" android:layout_height="@dimen/button_history_size" android:id="@id/button_history"
+                     android:onClick="onButtonHistoryClick" android:layout_alignParentBottom="true"
+                     android:layout_alignParentRight="true" android:background="@drawable/hystory"
+                     android:layout_marginBottom="@dimen/button_history_margin"
+                     android:layout_marginRight="@dimen/button_history_margin"/>
+        <ImageButton android:layout_width="@dimen/button_history_size" android:layout_height="@dimen/button_history_size" android:id="@id/button_follow"
+                     android:layout_marginBottom="@dimen/button_history_margin" android:layout_marginRight="@dimen/button_history_margin"
+                     android:background="@drawable/follow"
+                     android:layout_toLeftOf="@id/button_settings" android:layout_alignParentBottom="true"
+                     android:onClick="onClickOther"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sake"
+                android:id="@+id/button" android:layout_alignParentTop="true" android:layout_toRightOf="@id/cookie_0"
+                android:onClick="onButtonClick" android:visibility="invisible"/>
+    </RelativeLayout>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_main_margin"
+            android:id="@+id/border_top" android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+            android:background="@drawable/border"/>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_main_margin"
+            android:id="@+id/border_bottom"
+            android:background="@drawable/border" android:layout_alignParentBottom="true"/>
+</RelativeLayout>
+

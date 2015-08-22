@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background1">
+    <ImageButton
+            android:layout_width="@dimen/button_back_width"
+            android:layout_height="@dimen/button_back_height"
+            android:id="@id/button_back" android:layout_alignParentLeft="true"
+            android:background="@drawable/back" android:layout_alignParentBottom="true"
+            android:onClick="backToMenu"
+            android:layout_marginLeft="@dimen/button_back_margin"
+            android:layout_marginBottom="@dimen/button_history_margin"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" android:id="@+id/settings_layout">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_calibrate"
+                android:id="@+id/settings_calibrate" style="@style/SettingsText"
+                android:layout_gravity="center_horizontal" android:onClick="onSettingsCalibrateClick"
+                android:clickable="true"/>
+        <TextView style="@style/SettingsText" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/settings_about" android:id="@+id/settings_about"
+                  android:layout_gravity="center" android:clickable="true" android:onClick="onSettingsAboutClick"
+                  android:layout_marginTop="@dimen/settings_text_margin"/>
+    </LinearLayout>
+</RelativeLayout>

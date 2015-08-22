@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/follow"
+                android:id="@+id/textView" android:gravity="center_horizontal" android:textSize="@dimen/follow_text_size"/>
+        <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+            <TableRow>
+                <ImageButton
+                        android:layout_width="@dimen/follow_icon_size"
+                        android:layout_height="@dimen/follow_icon_size"
+                        android:id="@+id/button_follow_facebook" android:background="@drawable/icon_facebook"
+                        android:layout_margin="@dimen/follow_icon_margin" android:onClick="onButtonFacebookClick"/>
+                <ImageButton
+                        android:layout_width="@dimen/follow_icon_size"
+                        android:layout_height="@dimen/follow_icon_size"
+                        android:id="@+id/button_follow_vk" android:background="@drawable/icon_vk"
+                        android:layout_margin="@dimen/follow_icon_margin" android:onClick="onButtonVkClick"/>
+                <ImageButton
+                        android:layout_width="@dimen/follow_icon_size"
+                        android:layout_height="@dimen/follow_icon_size"
+                        android:id="@+id/button_follow_twitter" android:background="@drawable/icon_twitter"
+                        android:layout_margin="@dimen/follow_icon_margin" android:onClick="onButtonTwitterClick"/>
+            </TableRow>
+            <TableRow>
+                <ImageButton
+                        android:layout_width="@dimen/follow_icon_size"
+                        android:layout_height="@dimen/follow_icon_size"
+                        android:id="@+id/button_follow_instagram" android:background="@drawable/icon_instagram"
+                        android:layout_margin="@dimen/follow_icon_margin" android:onClick="onButtonInstagramClick"/>
+                <ImageButton
+                        android:layout_width="@dimen/follow_icon_size"
+                        android:layout_height="@dimen/follow_icon_size"
+                        android:id="@+id/button_follow_youtube" android:background="@drawable/icon_youtube"
+                        android:layout_margin="@dimen/follow_icon_margin" android:onClick="onButtonYouTubeClick"/>
+                <ImageButton
+                        android:layout_width="@dimen/follow_icon_size"
+                        android:layout_height="@dimen/follow_icon_size"
+                        android:id="@+id/button_follow_google_play" android:background="@drawable/icon_google_play"
+                        android:layout_margin="@dimen/follow_icon_margin" android:onClick="onButtonGooglePlayClick"/>
+            </TableRow>
+        </TableLayout>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_back"
+                android:id="@+id/button_follow_back"
+                android:layout_gravity="center" android:textSize="@dimen/follow_button_back_text_size"
+                android:layout_marginTop="@dimen/follow_button_back_margin" android:onClick="onButtonBackClick"/>
+    </LinearLayout>
+</RelativeLayout>

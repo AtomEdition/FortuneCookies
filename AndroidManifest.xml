@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.atomEdition.FortuneCookies"
+          android:versionCode="4"
+          android:versionName="1.1">
+    <uses-sdk android:minSdkVersion="8"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <application
+            android:label="@string/app_name"
+            android:icon="@drawable/cookie_0"
+            android:name="android.app.Application">
+        <meta-data android:name="com.google.android.gms.version"
+                   android:value="@integer/google_play_services_version"/>
+        <activity android:name="com.atomEdition.FortuneCookies.CookiesActivity"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:launchMode="standard"
+                  android:clearTaskOnLaunch="true"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".promotion.FollowActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:id="@+id/follow_layout"/>
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:id="@+id/mainLayout"/>
+        <receiver android:name=".widget.CookieWidget"
+                  android:icon="@drawable/cookie_1"
+                  android:label="@string/widget_name">
+            <intent-filter>
+                <action
+                    android:name="android.appwidget.action.APPWIDGET_UPDATE">
+                </action>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_metadata">
+            </meta-data>
+        </receiver>
+    </application>
+</manifest> 

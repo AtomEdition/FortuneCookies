@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_main_margin">25dp</dimen>
+    <dimen name="cookie_size">100dp</dimen>
+    <dimen name="cookie_size_half">50dp</dimen>
+    <dimen name="prophecy_image_size">240dp</dimen>
+    <dimen name="prophecy_image_size_half">120dp</dimen>
+    <dimen name="prophecy_layout_size">240dp</dimen>
+    <dimen name="prophecy_layout_size_half">130dp</dimen>
+    <dimen name="prophecy_text_padding_right">2dp</dimen>
+    <dimen name="prophecy_text_margin_top">-10dp</dimen>
+    <dimen name="prophecy_image_margin_top">5dp</dimen>
+    <dimen name="list_history_margin">80dp</dimen>
+    <dimen name="button_back_height">40dp</dimen>
+    <dimen name="button_back_width">80dp</dimen>
+    <dimen name="button_back_margin">20dp</dimen>
+    <dimen name="button_history_margin">10dp</dimen>
+    <dimen name="button_history_size">60dp</dimen>
+    <dimen name="crumbs_size">140dp</dimen>
+    <dimen name="cooldown_margin">120dp</dimen>
+    <dimen name="row_history_prophecy">40sp</dimen>
+    <dimen name="row_history_date">20sp</dimen>
+    <dimen name="row_history_category">50dp</dimen>
+    <dimen name="row_history_margin">5dp</dimen>
+    <dimen name="about_image_size">40dp</dimen>
+    <dimen name="about_text_size">40dp</dimen>
+    <dimen name="about_text_margin">10dp</dimen>
+    <dimen name="settings_text_margin">40dp</dimen>
+    <dimen name="widget_height">110dp</dimen>
+    <dimen name="widget_width">250dp</dimen>
+    <dimen name="widget_padding">8dp</dimen>
+    <dimen name="follow_text_size">40dp</dimen>
+    <dimen name="follow_icon_size">60dp</dimen>
+    <dimen name="follow_icon_margin">8dp</dimen>
+    <dimen name="follow_button_back_text_size">20sp</dimen>
+    <dimen name="follow_button_back_margin">20sp</dimen>
+</resources>

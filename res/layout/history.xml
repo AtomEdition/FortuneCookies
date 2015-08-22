@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/background1">
+
+    <ListView
+            android:id="@+id/list_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_history_margin"
+            android:headerDividersEnabled="true"
+            android:cacheColorHint="#00000000"/>
+    <ImageButton
+            android:layout_width="@dimen/button_back_width"
+            android:layout_height="@dimen/button_back_height"
+            android:id="@id/button_back" android:layout_alignParentLeft="true"
+            android:background="@drawable/back" android:layout_alignParentBottom="true"
+            android:onClick="backToMenu"
+            android:layout_marginLeft="@dimen/button_back_margin"
+            android:layout_marginBottom="@dimen/button_history_margin"/>
+</RelativeLayout>
