@@ -6,12 +6,11 @@ import android.content.ContextWrapper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import com.atomEdition.FortuneCookies.CookiesActivity;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.animation.CookieAnimation;
-import com.atomEdition.FortuneCookies.utils.CookieUtils;
-import com.atomEdition.FortuneCookies.utils.ProphecyUtils;
+import com.atomEdition.FortuneCookies.services.CookieUtils;
+import com.atomEdition.FortuneCookies.services.ProphecyUtils;
 
 /**
  * Created by FruityDevil on 23.12.14.

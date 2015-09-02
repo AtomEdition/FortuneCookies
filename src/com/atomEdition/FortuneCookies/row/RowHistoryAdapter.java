@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.model.Prophecy;
-import com.atomEdition.FortuneCookies.utils.CookieUtils;
+import com.atomEdition.FortuneCookies.services.CookieUtils;
 
 import java.util.LinkedList;
 
@@ -19,10 +19,10 @@ import java.util.LinkedList;
  */
 public class RowHistoryAdapter extends BaseAdapter {
 
+    private static LayoutInflater layoutInflater = null;
     Context context;
     Activity activity;
     LinkedList<Prophecy> data;
-    private static LayoutInflater layoutInflater = null;
 
     public RowHistoryAdapter(Context context, Activity activity, LinkedList<Prophecy> data){
         this.context = context;

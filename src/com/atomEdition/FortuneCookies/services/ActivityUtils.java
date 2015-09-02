@@ -1,4 +1,4 @@
-package com.atomEdition.FortuneCookies.utils;
+package com.atomEdition.FortuneCookies.services;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,8 +6,6 @@ import android.content.ContextWrapper;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.Display;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.atomEdition.FortuneCookies.R;
@@ -15,7 +13,6 @@ import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.row.RowHistoryAdapter;
 import com.atomEdition.FortuneCookies.toast.ToastCustom;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -34,6 +31,11 @@ public class ActivityUtils extends ContextWrapper {
 
     public ActivityUtils(Context baseContext){
         super(baseContext);
+    }
+
+    public static void stopCountDownTimer() {
+        countDownTimer.cancel();
+        countDownTimer.onFinish();
     }
 
     public int convertToPx(Integer valueDp){
@@ -110,10 +112,5 @@ public class ActivityUtils extends ContextWrapper {
         if(value < 10)
             return "0" + value;
         return "" + value;
-    }
-
-    public static void stopCountDownTimer(){
-        countDownTimer.cancel();
-        countDownTimer.onFinish();
     }
 }

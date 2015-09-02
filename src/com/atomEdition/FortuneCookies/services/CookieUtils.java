@@ -1,4 +1,4 @@
-package com.atomEdition.FortuneCookies.utils;
+package com.atomEdition.FortuneCookies.services;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +17,9 @@ import com.atomEdition.FortuneCookies.view.LayoutView;
  */
 public class CookieUtils extends ContextWrapper {
 
-    private Activity activity;
     public static Integer halfCount = 2;
     public static boolean isCookiesPlaced = false;
+    private Activity activity;
 
     public CookieUtils(Context baseContext, Activity activity){
         super(baseContext);

@@ -22,11 +22,15 @@
     <string name="tutorial_zoom">Нажми на бумажку, чтобы увеличить</string>
     <string name="tutorial_last">Следующее предсказание появится через 4 часа</string>
     <!--> ABOUT <-->
+    <string name="about_prophecies_added">новых</string>
+    <string name="about_prophecies_total">всего</string>
     <string name="about_text_0">Случайные предсказания</string>
     <string name="about_text_1">Предсказания о деньгах</string>
     <string name="about_text_2">Предостережения</string>
     <string name="about_text_3">Любовные предсказания</string>
     <string name="about_text_4">Предсказания об успехе</string>
+    <string name="about_text_5">Здоровые предсказания</string>
+    <string name="about_text_6">Вульгарные предсказания</string>
     <!--> ДЕНЬГИ <-->
     <string-array name="prophecies_1">
         <item>Сегодня хороший день, чтобы потратить деньги.</item>

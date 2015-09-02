@@ -1,4 +1,4 @@
-package com.atomEdition.FortuneCookies.utils;
+package com.atomEdition.FortuneCookies.services;
 
 import android.content.Context;
 import android.content.ContextWrapper;

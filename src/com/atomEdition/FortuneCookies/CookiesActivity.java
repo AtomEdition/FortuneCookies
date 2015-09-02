@@ -2,7 +2,10 @@ package com.atomEdition.FortuneCookies;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.hardware.*;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +17,10 @@ import com.atomEdition.FortuneCookies.animation.CookieAnimation;
 import com.atomEdition.FortuneCookies.model.Position;
 import com.atomEdition.FortuneCookies.model.Prophecy;
 import com.atomEdition.FortuneCookies.promotion.FollowActivity;
+import com.atomEdition.FortuneCookies.services.*;
 import com.atomEdition.FortuneCookies.settings.Accelerometer;
 import com.atomEdition.FortuneCookies.settings.ButtonListener;
 import com.atomEdition.FortuneCookies.toast.ToastCustom;
-import com.atomEdition.FortuneCookies.utils.ActivityUtils;
-import com.atomEdition.FortuneCookies.utils.CookieUtils;
-import com.atomEdition.FortuneCookies.utils.GetUtils;
-import com.atomEdition.FortuneCookies.utils.ProphecyUtils;
 import com.atomEdition.FortuneCookies.view.CookieView;
 import com.atomEdition.FortuneCookies.view.LayoutView;
 import com.atomEdition.FortuneCookies.view.TutorialView;
@@ -32,6 +32,8 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.util.Date;
 
 public class CookiesActivity extends Activity implements SensorEventListener {
+
+    private InterstitialAd interstitialAd;
 
     private void initialization(){
         ActivityUtils.activity = this;
@@ -220,11 +222,15 @@ public class CookiesActivity extends Activity implements SensorEventListener {
 
     public void onSettingsAboutClick(View view){
         setContentView(R.layout.about);
+        AboutService aboutService = new AboutService(this);
+        for (int i = 0; i < Utils.PROPHECY_CATEGORIES_COUNT_TOTAL; i++) {
+            int aboutTextId = getResources().getIdentifier(Utils.ABOUT_TEXT_VIEW_IDENTIFIER + i, "id", getPackageName());
+            TextView textView = (TextView) findViewById(aboutTextId);
+            textView.setText(aboutService.getAboutTextByCategory(i));
+        }
     }
 
     public void onButtonClick(View view){ onShake(); }
-
-    private InterstitialAd interstitialAd;
 
     public void setAd(){
         interstitialAd = new InterstitialAd(this);

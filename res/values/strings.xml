@@ -22,11 +22,15 @@
     <string name="tutorial_zoom">Tap paper to zoom</string>
     <string name="tutorial_last">Next prophecy will be able after 4 hours</string>
     <!--> ABOUT <-->
+    <string name="about_prophecies_added">added</string>
+    <string name="about_prophecies_total">total</string>
     <string name="about_text_0">Random prophecies</string>
     <string name="about_text_1">Money prophecies</string>
     <string name="about_text_2">Warnings</string>
     <string name="about_text_3">Love prophecies</string>
     <string name="about_text_4">Success prophecies</string>
+    <string name="about_text_5">Health prophecies</string>
+    <string name="about_text_6">Vulgar prophecies</string>
     <!--> MONEY <-->
     <string-array name="prophecies_1">
         <item>Today is a good day to spend money.</item>

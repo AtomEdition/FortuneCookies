@@ -1,6 +1,5 @@
 package com.atomEdition.FortuneCookies.settings;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
@@ -10,8 +9,8 @@ import android.hardware.SensorManager;
 import android.widget.Toast;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
-import com.atomEdition.FortuneCookies.utils.ActivityUtils;
-import com.atomEdition.FortuneCookies.utils.CookieUtils;
+import com.atomEdition.FortuneCookies.services.ActivityUtils;
+import com.atomEdition.FortuneCookies.services.CookieUtils;
 
 /**
  * Created by FruityDevil on 18.12.14.

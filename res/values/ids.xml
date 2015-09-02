@@ -31,6 +31,10 @@
     <item name="about_text_3" type="id">413</item>
     <item name="about_image_4" type="id">404</item>
     <item name="about_text_4" type="id">414</item>
+    <item name="about_image_5" type="id">405</item>
+    <item name="about_text_5" type="id">415</item>
+    <item name="about_image_6" type="id">406</item>
+    <item name="about_text_6" type="id">416</item>
     <item name="list_view" type="id">0</item>
     <item name="cookie_0" type="id">0</item>
     <item name="cookie_1" type="id">1</item>

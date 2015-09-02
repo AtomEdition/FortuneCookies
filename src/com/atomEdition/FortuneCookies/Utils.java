@@ -14,39 +14,31 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class Utils {
-    public static Double SHAKE_THRESHOLD = 1.5d;
     public static final Double SHAKE_THRESHOLD_DEFAULT = 1.55d;
-    public static Integer SHAKE_COUNT_CURRENT = 0;
     public static final Integer SHAKE_COUNT = 2;
     public static final Integer SHAKE_TIME = 1000;
     public static final LinkedList<Double> CALIBRATION = new LinkedList<Double>();
-
     public static final String PREFERENCES_NAME = "preferences";
     public static final String PREFERENCES_LIST_SIZE = "size";
     public static final String PREFERENCES_LIST_ELEMENT = "prophecy_";
     public static final String PREFERENCES_SHAKE_THRESHOLD = "calibration_";
-
     public static final Integer VIBRATE_FALL_TIME = 100;
     public static final Integer VIBRATE_CRACK_TIME = 60;
-
-    public static final Integer PROPHECY_CATEGORIES_COUNT = 5;
-    public static final Integer[] PROPHECY_ARRAY_WAS_ADDED_IN_LAST_PATCH = {3, 6, 12, 14, 20};
+    public static final Integer PROPHECY_CATEGORIES_COUNT_TOTAL = 6;
+    //todo: count total prophecy count in service
+    public static final Integer PROPHECY_COUNT_TOTAL = 165;
+    public static final Integer[] PROPHECY_ARRAY_WAS_ADDED_IN_LAST_PATCH = {55, 3, 6, 12, 14, 20};
     public static final String PROPHECY_CATEGORY_NAME = "prophecies_";
+    public static final String ABOUT_TEXT_VIEW_IDENTIFIER = "about_text_";
+    public static final String ABOUT_TEXT_STRING_IDENTIFIER = "about_text_";
     public static final Integer PROPHECY_WIDTH = 400;
-
-    public static Integer SCREEN_HEIGHT;
-    public static Integer SCREEN_WIDTH;
-    public static Integer SCREEN_LIMIT;
-
     public static final Integer ANIMATION_APPEAR_DURATION = 200;
     public static final Integer ANIMATION_MOVE_TO_CENTER_DURATION = 1000;
     public static final Integer ANIMATION_MOVE_OUT_DURATION = 800;
     public static final Integer ANIMATION_MOVE_OUT_SIDES_DURATION = 500;
     public static final Integer ANIMATION_PROPHECY_DURATION = 400;
     public static final Integer ANIMATION_CRUMBS_DURATION = 150;
-
     public static final Long COOLDOWN = (1000L * 60 * 60) * 4;
-
     public static final Integer COOKIES_COUNT = 5;
     public static final String COOKIE_NAME = "cookie_";
     public static final String COOKIE_HALF_LEFT_NAME = "cookie_half_left_";
@@ -56,12 +48,16 @@ public abstract class Utils {
     public static final Integer COOKIE_SIZE = 100;
     public static final Integer BORDER_SIZE = 25*2;
     private static final Integer DISTANCE_BETWEEN_COOKIES = 85;
-    private static LinkedList<Position> POSITIONS = new LinkedList<Position>();
+    public static Double SHAKE_THRESHOLD = 1.5d;
+    public static Integer SHAKE_COUNT_CURRENT = 0;
+    public static Integer SCREEN_HEIGHT;
+    public static Integer SCREEN_WIDTH;
+    public static Integer SCREEN_LIMIT;
     public static LinkedList<Integer> COOKIES = new LinkedList<Integer>();
     public static LinkedList<Prophecy> PROPHECIES = new LinkedList<Prophecy>();
     public static boolean IS_TUTORIAL_NEEDED = false;
-
     public static Random random = new Random();
+    private static LinkedList<Position> POSITIONS = new LinkedList<Position>();
 
     public static void clearPositions(){
         POSITIONS.clear();
@@ -97,7 +93,7 @@ public abstract class Utils {
     public static void generateCookies(){
         COOKIES.clear();
         for(int i=0; i<COOKIES_COUNT; i++)
-            COOKIES.add(random.nextInt(PROPHECY_CATEGORIES_COUNT+1));
+            COOKIES.add(random.nextInt(PROPHECY_CATEGORIES_COUNT_TOTAL));
     }
 
     public static Double average(LinkedList<Double> linkedList){

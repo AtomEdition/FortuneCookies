@@ -1,4 +1,4 @@
-package com.atomEdition.FortuneCookies.utils;
+package com.atomEdition.FortuneCookies.services;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,12 +21,29 @@ import java.util.Date;
  */
 public class ProphecyUtils extends ContextWrapper {
 
-    Activity activity;
     private static SharedPreferences sharedPreferences;
+    Activity activity;
 
     public ProphecyUtils(Context baseContext, Activity activity){
         super(baseContext);
         this.activity = activity;
+    }
+
+    public static void readProphecies(Context context) {
+        sharedPreferences = context.getSharedPreferences(Utils.PREFERENCES_NAME, 0);
+        int size = sharedPreferences.getInt(Utils.PREFERENCES_LIST_SIZE, 0);
+        Utils.PROPHECIES.clear();
+        if (size > 0)
+            for (int i = 0; i < size; i++)
+                Utils.PROPHECIES.add(new Prophecy(sharedPreferences.getString(Utils.PREFERENCES_LIST_ELEMENT + i, "")));
+    }
+
+    public static boolean isProphecyAlreadyGot(Context context) {
+        readProphecies(context);
+        if (Utils.PROPHECIES.size() > 0)
+            if (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() < Utils.COOLDOWN)
+                return true;
+        return false;
     }
 
     public void prophecyCheck(){
@@ -56,22 +73,13 @@ public class ProphecyUtils extends ContextWrapper {
         if(category!=0)
             prophecyCategory = getProphecyCategory(category);
         else
-            prophecyCategory = getProphecyCategory(Utils.random.nextInt(Utils.PROPHECY_CATEGORIES_COUNT) + 1);
+            prophecyCategory = getProphecyCategory(Utils.random.nextInt(Utils.PROPHECY_CATEGORIES_COUNT_TOTAL) + 1);
         int randomProphecy = Utils.random.nextInt(getResources().getStringArray(prophecyCategory).length);
         return getResources().getStringArray(prophecyCategory)[randomProphecy];
     }
 
     private Integer getProphecyCategory(Integer categoryId){
         return getResources().getIdentifier(Utils.PROPHECY_CATEGORY_NAME + categoryId, "array", getPackageName());
-    }
-
-    public static void readProphecies(Context context){
-        sharedPreferences = context.getSharedPreferences(Utils.PREFERENCES_NAME, 0);
-        int size = sharedPreferences.getInt(Utils.PREFERENCES_LIST_SIZE, 0);
-        Utils.PROPHECIES.clear();
-        if(size > 0)
-            for(int i=0; i<size; i++)
-                Utils.PROPHECIES.add(new Prophecy(sharedPreferences.getString(Utils.PREFERENCES_LIST_ELEMENT + i, "")));
     }
 
     public void checkProphecyAlreadyGot(){
@@ -85,14 +93,6 @@ public class ProphecyUtils extends ContextWrapper {
             else
                 ActivityUtils.toastCustom = new ToastCustom(this, activity, getResources().getString(R.string.cookies_ready),
                         Toast.LENGTH_SHORT);
-    }
-
-    public static boolean isProphecyAlreadyGot(Context context){
-        readProphecies(context);
-        if(Utils.PROPHECIES.size() > 0)
-            if(new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() < Utils.COOLDOWN)
-                return true;
-        return false;
     }
 
     private void showProphecyAlreadyGot(){

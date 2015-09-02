@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.widget.Toast;
 import com.atomEdition.FortuneCookies.Utils;
+import com.atomEdition.FortuneCookies.services.ActivityUtils;
 import com.atomEdition.FortuneCookies.toast.ToastCustom;
-import com.atomEdition.FortuneCookies.utils.ActivityUtils;
 
 import java.util.Date;
 

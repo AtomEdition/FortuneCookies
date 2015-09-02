@@ -1,6 +1,5 @@
 package com.atomEdition.FortuneCookies.animation;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
-import com.atomEdition.FortuneCookies.utils.ActivityUtils;
+import com.atomEdition.FortuneCookies.services.ActivityUtils;
 import com.atomEdition.FortuneCookies.view.TutorialView;
 
 /**

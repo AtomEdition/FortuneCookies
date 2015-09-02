@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
-import com.atomEdition.FortuneCookies.utils.GetUtils;
+import com.atomEdition.FortuneCookies.services.GetUtils;
 
 /**
  * Created by FruityDevil on 17.12.14.
