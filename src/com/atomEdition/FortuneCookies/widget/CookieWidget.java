@@ -13,7 +13,7 @@ import com.atomEdition.FortuneCookies.CookiesActivity;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.model.Prophecy;
-import com.atomEdition.FortuneCookies.utils.ProphecyUtils;
+import com.atomEdition.FortuneCookies.services.ProphecyUtils;
 
 /**
  * Created by FruityDevil on 27.01.2015.
@@ -21,6 +21,31 @@ import com.atomEdition.FortuneCookies.utils.ProphecyUtils;
 public class CookieWidget extends AppWidgetProvider {
 
     public static String ACTION_WIDGET_RECEIVER = "ActionReceiverWidget";
+
+    private static void updateWidget(Context context, AppWidgetManager appWidgetManager,
+                                     SharedPreferences sharedPreferences, int widgetId) {
+        RemoteViews widgetView = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        if (ProphecyUtils.isProphecyAlreadyGot(context)) {
+            int size = sharedPreferences.getInt(Utils.PREFERENCES_LIST_SIZE, 0);
+            Prophecy prophecy = new Prophecy(sharedPreferences.getString(Utils.PREFERENCES_LIST_ELEMENT + (size - 1), ""));
+            widgetView.setTextViewText(R.id.text_widget, prophecy.getProphecy());
+            int paperId = context.getResources().getIdentifier(Utils.PROPHECY_NAME + prophecy.getProphecyType(), "drawable", context.getPackageName());
+            widgetView.setImageViewResource(R.id.image_widget, paperId);
+        } else {
+            widgetView.setTextViewText(R.id.text_widget, "");
+            widgetView.setImageViewResource(R.id.image_widget, R.drawable.widget_image_idle);
+        }
+        appWidgetManager.updateAppWidget(widgetId, widgetView);
+    }
+
+    public static Intent updateWidget(Context appContext, Application application) {
+        Intent intent = new Intent(appContext, CookieWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(application).getAppWidgetIds(new ComponentName(application, CookieWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        return intent;
+    }
+
     @Override
     public void onEnabled(Context context){
         super.onEnabled(context);
@@ -60,31 +85,6 @@ public class CookieWidget extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
-    }
-
-    private static void updateWidget(Context context, AppWidgetManager appWidgetManager,
-                                     SharedPreferences sharedPreferences, int widgetId){
-        RemoteViews widgetView = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-        if(ProphecyUtils.isProphecyAlreadyGot(context)) {
-            int size = sharedPreferences.getInt(Utils.PREFERENCES_LIST_SIZE, 0);
-            Prophecy prophecy = new Prophecy(sharedPreferences.getString(Utils.PREFERENCES_LIST_ELEMENT + (size - 1), ""));
-            widgetView.setTextViewText(R.id.text_widget, prophecy.getProphecy());
-            int paperId = context.getResources().getIdentifier(Utils.PROPHECY_NAME + prophecy.getProphecyType(), "drawable", context.getPackageName());
-            widgetView.setImageViewResource(R.id.image_widget, paperId);
-        } else {
-            widgetView.setTextViewText(R.id.text_widget, "");
-            widgetView.setImageViewResource(R.id.image_widget, R.drawable.cookies_ready);
-            widgetView.setImageViewResource(R.id.animation_widget, R.anim.widget_animation);
-        }
-        appWidgetManager.updateAppWidget(widgetId, widgetView);
-    }
-
-    public static Intent updateWidget(Context appContext, Application application){
-        Intent intent = new Intent(appContext, CookieWidget.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        int[] ids = AppWidgetManager.getInstance(application).getAppWidgetIds(new ComponentName(application, CookieWidget.class));
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-        return intent;
     }
 
 }

@@ -7,15 +7,10 @@
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@id/animation_widget"/>
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@id/image_widget"/>
+            android:id="@id/image_widget" android:src="@drawable/widget_image_idle"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Medium Text"
             android:id="@id/text_widget"
             android:gravity="center" android:layout_centerInParent="true"
             android:lineSpacingMultiplier="0.8" android:paddingRight="@dimen/prophecy_text_padding_right"
