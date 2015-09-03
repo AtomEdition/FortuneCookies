@@ -10,7 +10,6 @@ import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.animation.CookieAnimation;
 import com.atomEdition.FortuneCookies.model.Prophecy;
-import com.atomEdition.FortuneCookies.toast.ToastCustom;
 import com.atomEdition.FortuneCookies.view.CookieView;
 import com.atomEdition.FortuneCookies.view.TutorialView;
 
@@ -24,7 +23,7 @@ public class ProphecyUtils extends ContextWrapper {
     private static SharedPreferences sharedPreferences;
     Activity activity;
 
-    public ProphecyUtils(Context baseContext, Activity activity){
+    public ProphecyUtils(Context baseContext, Activity activity) {
         super(baseContext);
         this.activity = activity;
     }
@@ -46,56 +45,57 @@ public class ProphecyUtils extends ContextWrapper {
         return false;
     }
 
-    public void prophecyCheck(){
-        ImageButton imageButton = (ImageButton)activity.findViewById(R.id.prophecy);
-        if(CookieUtils.halfCount<=0){
+    public void prophecyCheck() {
+        ImageButton imageButton = (ImageButton) activity.findViewById(R.id.prophecy_image);
+        if (CookieUtils.halfCount <= 0) {
             new TutorialView(this, activity).checkAndShow(R.string.tutorial_zoom);
             imageButton.setClickable(true);
         }
     }
 
-    public void updateProphecies(){
+    public void updateProphecies() {
         Utils.PROPHECIES.getLast().setDate(new Date());
         saveProphecies();
     }
 
-    private void saveProphecies(){
+    private void saveProphecies() {
         sharedPreferences = this.getSharedPreferences(Utils.PREFERENCES_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(Utils.PREFERENCES_LIST_SIZE, Utils.PROPHECIES.size());
-        for(int i=0; i<Utils.PROPHECIES.size(); i++)
+        for (int i = 0; i < Utils.PROPHECIES.size(); i++)
             editor.putString(Utils.PREFERENCES_LIST_ELEMENT + i, Utils.PROPHECIES.get(i).getStringToSave());
         editor.commit();
     }
 
-    public String getProphecy(Integer category){
+    public String getProphecy(Integer category) {
         int prophecyCategory;
-        if(category!=0)
+        if (category != 0)
             prophecyCategory = getProphecyCategory(category);
         else
-            prophecyCategory = getProphecyCategory(Utils.random.nextInt(Utils.PROPHECY_CATEGORIES_COUNT_TOTAL) + 1);
+            prophecyCategory = getProphecyCategory(Utils.random.nextInt(Utils.PROPHECY_CATEGORIES_COUNT_TOTAL - 1) + 1);
         int randomProphecy = Utils.random.nextInt(getResources().getStringArray(prophecyCategory).length);
         return getResources().getStringArray(prophecyCategory)[randomProphecy];
     }
 
-    private Integer getProphecyCategory(Integer categoryId){
+    private Integer getProphecyCategory(Integer categoryId) {
         return getResources().getIdentifier(Utils.PROPHECY_CATEGORY_NAME + categoryId, "array", getPackageName());
     }
 
-    public void checkProphecyAlreadyGot(){
-           if(isProphecyAlreadyGot(this)){
-                CookieUtils.isCookiesPlaced = true;
-                showProphecyAlreadyGot();
-                new CookieView(this, activity).showButtons();
-                ActivityUtils.coolDownTimer.start();
-                new CookieAnimation(this).setProphecyIdleAnimation();
-            }
-            else
-                ActivityUtils.toastCustom = new ToastCustom(this, activity, getResources().getString(R.string.cookies_ready),
-                        Toast.LENGTH_SHORT);
+    public void checkProphecyAlreadyGot() {
+        if (isProphecyAlreadyGot(this)) {
+            CookieUtils.isCookiesPlaced = true;
+            showProphecyAlreadyGot();
+            new CookieView(this, activity).showButtons();
+            new CookieView(this, activity).setClickable(R.id.prophecy_image);
+            ActivityUtils.coolDownTimer.start();
+            ActivityUtils.setFlagCooldown(true);
+            new CookieAnimation(this).setProphecyIdleAnimation();
+        } else {
+            ActivityUtils.toastCustomBottom.showText(getResources().getString(R.string.cookies_ready), Toast.LENGTH_SHORT);
+        }
     }
 
-    private void showProphecyAlreadyGot(){
+    private void showProphecyAlreadyGot() {
         new CookieUtils(this, activity).setCookieFinalCategory(Utils.PROPHECIES.getLast().getProphecyType());
         new CookieView(this, activity).makeVisible(R.id.prophecy_layout);
     }

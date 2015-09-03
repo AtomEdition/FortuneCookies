@@ -6,7 +6,6 @@ import android.content.ContextWrapper;
 import android.widget.Toast;
 import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.services.ActivityUtils;
-import com.atomEdition.FortuneCookies.toast.ToastCustom;
 
 import java.util.Date;
 
@@ -30,7 +29,7 @@ public class TutorialView extends ContextWrapper {
     public void checkAndShow(Integer messageId){
         if(Utils.IS_TUTORIAL_NEEDED)
             if((Utils.PROPHECIES.size() < 1) || (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() < Utils.COOLDOWN)){
-                ActivityUtils.toastCustom = new ToastCustom(this, activity, getResources().getString(messageId),
+                ActivityUtils.toastCustomBottom.showText(getResources().getString(messageId),
                         Toast.LENGTH_SHORT);
             }
     }

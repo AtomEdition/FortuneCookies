@@ -16,21 +16,41 @@ import com.atomEdition.FortuneCookies.R;
  */
 public class ToastCustom extends ContextWrapper {
     private Toast toast;
+    private TextView textView;
 
-    public ToastCustom(Context baseContext, Activity activity, String text, Integer duration){
+    public ToastCustom(Context baseContext, Activity activity) {
         super(baseContext);
         LayoutInflater layoutInflater = activity.getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.toast_layout, (ViewGroup)activity.findViewById(R.id.toast_layout));
-        TextView textView = (TextView)view.findViewById(R.id.toast_text);
-        textView.setText(text);
-        toast = new Toast(activity.getApplicationContext());
-        toast.setGravity(Gravity.BOTTOM, 0, 0);
-        toast.setDuration(duration);
-        toast.setView(view);
-        toast.show();
+        setTextView((TextView) view.findViewById(R.id.toast_text));
+        setToast(new Toast(activity.getApplicationContext()));
+        getToast().setGravity(Gravity.BOTTOM, 0, 0);
+        getToast().setView(view);
+    }
+
+    public void showText(String text, Integer duration) {
+        getTextView().setText(text);
+        getToast().setDuration(duration);
+        getToast().show();
     }
 
     public void cancel(){
         toast.cancel();
+    }
+
+    public Toast getToast() {
+        return toast;
+    }
+
+    public void setToast(Toast toast) {
+        this.toast = toast;
+    }
+
+    public TextView getTextView() {
+        return textView;
+    }
+
+    public void setTextView(TextView textView) {
+        this.textView = textView;
     }
 }

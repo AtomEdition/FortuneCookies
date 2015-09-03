@@ -20,7 +20,6 @@ import com.atomEdition.FortuneCookies.promotion.FollowActivity;
 import com.atomEdition.FortuneCookies.services.*;
 import com.atomEdition.FortuneCookies.settings.Accelerometer;
 import com.atomEdition.FortuneCookies.settings.ButtonListener;
-import com.atomEdition.FortuneCookies.toast.ToastCustom;
 import com.atomEdition.FortuneCookies.view.CookieView;
 import com.atomEdition.FortuneCookies.view.LayoutView;
 import com.atomEdition.FortuneCookies.view.TutorialView;
@@ -34,19 +33,21 @@ import java.util.Date;
 public class CookiesActivity extends Activity implements SensorEventListener {
 
     private InterstitialAd interstitialAd;
+    private ActivityUtils activityUtils;
 
     private void initialization(){
         ActivityUtils.activity = this;
-       new Accelerometer(this).setSensors();
-        new ActivityUtils(this).setVibrators();
-        new ActivityUtils(this).setTimers();
+        setActivityUtils(new ActivityUtils(this));
+        new Accelerometer(this).setSensors();
+        getActivityUtils().setVibrators();
+        getActivityUtils().setTimers();
         new CookieUtils(this, this).prepareCookies();
-        new ActivityUtils(this).setScreenSize();
+        getActivityUtils().setScreenSize();
         new Accelerometer(this).loadCalibration();
         new TutorialView(this, this).checkIsTutorialNeeded();
         sendBroadcast(CookieWidget.updateWidget(getApplicationContext(), getApplication()));
         if(Utils.SHAKE_THRESHOLD == 0d){
-            ActivityUtils.toastCustom = new ToastCustom(this, this, getResources().getString(R.string.calibrate_start), Toast.LENGTH_LONG);
+            ActivityUtils.toastCustomBottom.showText(getString(R.string.calibrate_start), Toast.LENGTH_LONG);
             new LayoutView(this, this).toCalibrateLayout();
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
@@ -64,7 +65,7 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     public void onPause(){
         try {
             new Accelerometer(this).unRegisterSensorListener(this);
-            ActivityUtils.toastCustom.cancel();
+            ActivityUtils.toastCustomBottom.cancel();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,8 +84,11 @@ public class CookiesActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onBackPressed(){
-        if (ActivityUtils.toastCustom != null) {
-            ActivityUtils.toastCustom.cancel();
+        if (ActivityUtils.toastCustomTop != null) {
+            ActivityUtils.toastCustomTop.cancel();
+        }
+        if (ActivityUtils.toastCustomBottom != null) {
+            ActivityUtils.toastCustomBottom.cancel();
         }
         super.onBackPressed();
     }
@@ -107,7 +111,7 @@ public class CookiesActivity extends Activity implements SensorEventListener {
 
     private void onShake(){
         if(!CookieUtils.isCookiesPlaced){
-            if(!ActivityUtils.isTicking){
+            if (!ActivityUtils.flagTicking) {
                 new TutorialView(this, this).checkAndShow(R.string.tutorial_choose);
                 ActivityUtils.countDownTimer.start();
             }
@@ -167,7 +171,7 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     public void onProphecyClick(View view){
-        if(!ActivityUtils.isCooldown) {
+        if (!ActivityUtils.flagCooldown) {
             new ProphecyUtils(this, this).updateProphecies();
             sendBroadcast(CookieWidget.updateWidget(getApplicationContext(), getApplication()));
         }
@@ -184,6 +188,10 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         FrameLayout frameLayout = (FrameLayout)findViewById(R.id.prophecy_layout);
         frameLayout.startAnimation(scaleAnimation);
         ActivityUtils.coolDownTimer.start();
+        ActivityUtils.setFlagCooldown(true);
+        if (getActivityUtils().isVideoCanBeShown()) {
+            ActivityUtils.toastCustomTop.showText(getString(R.string.video_available), Toast.LENGTH_LONG);
+        }
     }
 
     public void onButtonHistoryClick(View view){
@@ -212,12 +220,12 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         new LayoutView(this, this).toMainLayout();
         new CookieUtils(this, this).prepareCookies();
         if(!CookieUtils.isCookiesPlaced)
-            ActivityUtils.toastCustom = new ToastCustom(this, this, getResources().getString(R.string.tutorial_shake), Toast.LENGTH_SHORT);
+            ActivityUtils.toastCustomBottom.showText(getResources().getString(R.string.tutorial_shake), Toast.LENGTH_SHORT);
     }
 
     public void onSettingsCalibrateClick(View view){
         new LayoutView(this, this).toCalibrateLayout();
-        ActivityUtils.toastCustom = new ToastCustom(this, this, getResources().getString(R.string.calibrate_start), Toast.LENGTH_LONG);
+        ActivityUtils.toastCustomBottom.showText(getResources().getString(R.string.calibrate_start), Toast.LENGTH_LONG);
     }
 
     public void onSettingsAboutClick(View view){
@@ -230,7 +238,17 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         }
     }
 
-    public void onButtonClick(View view){ onShake(); }
+    public void onWatchVideoClick(View view) {
+        if (getActivityUtils().isVideoCanBeShown()) {
+            getActivityUtils().dropCoolDown();
+        } else {
+            getActivityUtils().showTextWithToast(getString(R.string.video_already_watched));
+        }
+    }
+
+    public void onButtonTestClick(View view) {
+        onShake();
+    }
 
     public void setAd(){
         interstitialAd = new InterstitialAd(this);
@@ -250,5 +268,13 @@ public class CookiesActivity extends Activity implements SensorEventListener {
             });
             interstitialAd.show();
         }
+    }
+
+    public ActivityUtils getActivityUtils() {
+        return activityUtils;
+    }
+
+    public void setActivityUtils(ActivityUtils activityUtils) {
+        this.activityUtils = activityUtils;
     }
 }

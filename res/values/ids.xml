@@ -44,19 +44,20 @@
     <item name="cookie_final" type="id">5</item>
     <item name="cookie_half_left" type="id">6</item>
     <item name="cookie_half_right" type="id">7</item>
-    <item name="prophecy" type="id">8</item>
+    <item name="prophecy_image" type="id">8</item>
     <item name="button_history" type="id">9</item>
     <item name="button_back" type="id">10</item>
     <item name="button_settings" type="id">11</item>
+    <item name="button_video" type="id">12</item>
     <!--FOLLOW IDS-->
     <item name="follow_layout" type="id">506</item>
-    <item name="button_follow" type="id">12</item>
-    <item name="button_follow_back" type="id">13</item>
-    <item name="button_follow_facebook" type="id">14</item>
-    <item name="button_follow_vk" type="id">15</item>
-    <item name="button_follow_twitter" type="id">16</item>
-    <item name="button_follow_youtube" type="id">17</item>
-    <item name="button_follow_instagram" type="id">18</item>
-    <item name="button_follow_google_play" type="id">19</item>
+    <item name="button_follow" type="id">612</item>
+    <item name="button_follow_back" type="id">613</item>
+    <item name="button_follow_facebook" type="id">614</item>
+    <item name="button_follow_vk" type="id">615</item>
+    <item name="button_follow_twitter" type="id">616</item>
+    <item name="button_follow_youtube" type="id">617</item>
+    <item name="button_follow_instagram" type="id">618</item>
+    <item name="button_follow_google_play" type="id">619</item>
     <!---->
 </resources>

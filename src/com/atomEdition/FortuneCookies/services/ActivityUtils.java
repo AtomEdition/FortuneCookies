@@ -6,8 +6,10 @@ import android.content.ContextWrapper;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.Display;
+import android.view.Gravity;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.row.RowHistoryAdapter;
@@ -22,20 +24,32 @@ public class ActivityUtils extends ContextWrapper {
 
     public static Activity activity;
     public static Vibrator vibrator;
-    public static ToastCustom toastCustom;
+    public static ToastCustom toastCustomTop;
+    public static ToastCustom toastCustomBottom;
     public static CountDownTimer countDownTimer;
     public static CountDownTimer coolDownTimer;
-    public static boolean isTicking = false;
-    public static boolean isCooldown = false;
+    public static boolean flagTicking = false;
+    public static boolean flagCooldown = false;
     public static int cookiesOnTableAvailable = Utils.COOKIES_COUNT-1;
 
     public ActivityUtils(Context baseContext){
         super(baseContext);
+        toastCustomBottom = new ToastCustom(this, activity);
+        toastCustomTop = new ToastCustom(this, activity);
+        toastCustomTop.getToast().setGravity(Gravity.TOP, 0, 0);
     }
 
     public static void stopCountDownTimer() {
         countDownTimer.cancel();
         countDownTimer.onFinish();
+    }
+
+    public static boolean isFlagCooldown() {
+        return flagCooldown;
+    }
+
+    public static void setFlagCooldown(boolean flagCooldown) {
+        ActivityUtils.flagCooldown = flagCooldown;
     }
 
     public int convertToPx(Integer valueDp){
@@ -56,7 +70,8 @@ public class ActivityUtils extends ContextWrapper {
 
     public void setDefaultValues(){
         CookieUtils.isCookiesPlaced = false;
-        isTicking = false;
+        flagTicking = false;
+        setFlagCooldown(false);
         cookiesOnTableAvailable = Utils.COOKIES_COUNT-1;
         CookieUtils.halfCount = 2;
     }
@@ -69,14 +84,14 @@ public class ActivityUtils extends ContextWrapper {
         countDownTimer = new CountDownTimer(Utils.SHAKE_TIME, 1) {
             @Override
             public void onTick(long l) {
-                isTicking = true;
+                flagTicking = true;
                 // Need to be overridden.
             }
 
             @Override
             public void onFinish() {
                 CookieUtils.isCookiesPlaced = true;
-                isTicking = false;
+                flagTicking = false;
                 Utils.clearPositions();
             }
         };
@@ -84,7 +99,6 @@ public class ActivityUtils extends ContextWrapper {
             @Override
             public void onTick(long l) {
                 try {
-                    isCooldown = true;
                     TextView textView = (TextView)activity.findViewById(R.id.text_cooldown);
                     textView.setText(getCoolDown());
                 } catch (Exception e){}
@@ -93,13 +107,13 @@ public class ActivityUtils extends ContextWrapper {
             @Override
             public void onFinish() {
                 new CookieUtils(ActivityUtils.this, activity).prepareCookies();
-                isCooldown = false;
+                setFlagCooldown(false);
             }
         };
     }
 
     private String getCoolDown(){
-        Long time = Utils.COOLDOWN - (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime());
+        Long time = Utils.COOLDOWN - (new Date().getTime() - Utils.PROPHECIES.get(Utils.PROPHECIES.size() - 1).getDate().getTime());
         if (time <= 0) {
             coolDownTimer.cancel();
             coolDownTimer.onFinish();
@@ -109,8 +123,26 @@ public class ActivityUtils extends ContextWrapper {
     }
 
     private String format(long value){
-        if(value < 10)
-            return "0" + value;
-        return "" + value;
+        return (value < 10) ? "0" + value : "" + value;
+    }
+
+    public void showTextWithToast(String string) {
+        toastCustomBottom.showText(string, Toast.LENGTH_SHORT);
+    }
+
+    public void dropCoolDown() {
+        coolDownTimer.cancel();
+        coolDownTimer.onFinish();
+        CookieUtils cookieUtils = new CookieUtils(getBaseContext(), activity);
+        cookieUtils.prepareValues();
+        cookieUtils.hideScreenObjects();
+        showTextWithToast(getResources().getString(R.string.cookies_ready));
+    }
+
+    public boolean isVideoCanBeShown() {
+        return Utils.PROPHECIES.size() < 2
+                || (Utils.PROPHECIES.get(Utils.PROPHECIES.size() - 1).getDate().getTime()
+                - Utils.PROPHECIES.get(Utils.PROPHECIES.size() - 2).getDate().getTime()
+                > Utils.COOLDOWN);
     }
 }

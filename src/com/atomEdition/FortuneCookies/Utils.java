@@ -3,7 +3,9 @@ package com.atomEdition.FortuneCookies;
 import com.atomEdition.FortuneCookies.model.Position;
 import com.atomEdition.FortuneCookies.model.Prophecy;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,7 +19,7 @@ public abstract class Utils {
     public static final Double SHAKE_THRESHOLD_DEFAULT = 1.55d;
     public static final Integer SHAKE_COUNT = 2;
     public static final Integer SHAKE_TIME = 1000;
-    public static final LinkedList<Double> CALIBRATION = new LinkedList<Double>();
+    public static final List<Double> CALIBRATION = new ArrayList<Double>();
     public static final String PREFERENCES_NAME = "preferences";
     public static final String PREFERENCES_LIST_SIZE = "size";
     public static final String PREFERENCES_LIST_ELEMENT = "prophecy_";
@@ -53,11 +55,11 @@ public abstract class Utils {
     public static Integer SCREEN_HEIGHT;
     public static Integer SCREEN_WIDTH;
     public static Integer SCREEN_LIMIT;
-    public static LinkedList<Integer> COOKIES = new LinkedList<Integer>();
+    public static List<Integer> COOKIES = new ArrayList<Integer>();
     public static LinkedList<Prophecy> PROPHECIES = new LinkedList<Prophecy>();
     public static boolean IS_TUTORIAL_NEEDED = false;
     public static Random random = new Random();
-    private static LinkedList<Position> POSITIONS = new LinkedList<Position>();
+    private static List<Position> POSITIONS = new ArrayList<Position>();
 
     public static void clearPositions(){
         POSITIONS.clear();
@@ -77,13 +79,13 @@ public abstract class Utils {
 
     public static Position placeCookies(){
         Position newPosition = new Position(random.nextInt(SCREEN_WIDTH), random.nextInt(SCREEN_HEIGHT));
-        if(POSITIONS.size()>0)
-            for(Position position : POSITIONS)
-                if(!isPositionCorrect(position.getX(), newPosition.getX()) &&
+        if (POSITIONS.size() > 0)
+            for (Position position : POSITIONS)
+                if (!isPositionCorrect(position.getX(), newPosition.getX()) &&
                         !isPositionCorrect(position.getY(),newPosition.getY()))
                     return placeCookies();
         POSITIONS.add(newPosition);
-        return POSITIONS.getLast();
+        return POSITIONS.get(POSITIONS.size() - 1);
     }
 
     public static boolean isNear(float value1, float value2, int radius){
@@ -96,18 +98,18 @@ public abstract class Utils {
             COOKIES.add(random.nextInt(PROPHECY_CATEGORIES_COUNT_TOTAL));
     }
 
-    public static Double average(LinkedList<Double> linkedList){
+    public static Double average(List<Double> linkedList) {
         for(Double value : linkedList)
             SHAKE_THRESHOLD += value;
         SHAKE_THRESHOLD /= linkedList.size();
         return SHAKE_THRESHOLD;
     }
 
-    public static LinkedList<Prophecy> descendingList(LinkedList<Prophecy> inputList){
-        LinkedList<Prophecy> newList = new LinkedList<Prophecy>();
+    public static List<Prophecy> descendingList(List<Prophecy> inputList) {
+        List<Prophecy> newList = new ArrayList<Prophecy>();
         while (inputList.size() > 0){
-            newList.add(inputList.getLast());
-            inputList.removeLast();
+            newList.add(inputList.get(Utils.PROPHECIES.size() - 1));
+            inputList.remove(Utils.PROPHECIES.size() - 1);
         }
         return newList;
     }

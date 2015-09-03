@@ -9,7 +9,7 @@
     <string name="calibrate_start">Shake device to calibrate or tap screen to set default value</string>
     <string name="calibrate_success">Calibration completed! Shake more to get cookies!</string>
     <string name="connection_failure">Something goes wrong. Check your Internet connection</string>
-    <string name="cookies_ready">Cookies are ready!</string>
+    <string name="cookies_ready">Shake for cookies!</string>
     <string name="button_back">Back</string>
     <!--> SETTINGS <-->
     <string name="settings_calibrate">Calibrate</string>
@@ -31,6 +31,9 @@
     <string name="about_text_4">Success prophecies</string>
     <string name="about_text_5">Health prophecies</string>
     <string name="about_text_6">Vulgar prophecies</string>
+    <!-- VIDEO -->
+    <string name="video_available">You can watch video to drop cooldown on cookies right now!</string>
+    <string name="video_already_watched">Unavailable! Come back later</string>
     <!--> MONEY <-->
     <string-array name="prophecies_1">
         <item>Today is a good day to spend money.</item>

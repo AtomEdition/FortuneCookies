@@ -47,7 +47,7 @@ public class CookieUtils extends ContextWrapper {
         imageButton.setBackgroundResource(getCookieHalf(categoryId, Utils.COOKIE_HALF_RIGHT_NAME));
         imageButton = (ImageButton)activity.findViewById(R.id.cookie_half_left);
         imageButton.setBackgroundResource(getCookieHalf(categoryId, Utils.COOKIE_HALF_LEFT_NAME));
-        imageButton = (ImageButton)activity.findViewById(R.id.prophecy);
+        imageButton = (ImageButton) activity.findViewById(R.id.prophecy_image);
         imageButton.setBackgroundResource(getProphecyImage(categoryId));
         ImageView imageView = (ImageView)activity.findViewById(R.id.image_crumbs);
         imageView.setBackgroundResource(getCrumbsImage(categoryId));
@@ -79,19 +79,26 @@ public class CookieUtils extends ContextWrapper {
         }
     }
 
-
     public void prepareCookies(){
+        prepareValues();
+        hideScreenObjects();
+        new ProphecyUtils(this, activity).checkProphecyAlreadyGot();
+    }
+
+    public void prepareValues() {
         new LayoutView(this, activity).toMainLayout();
         new ActivityUtils(this).setDefaultValues();
+        new ButtonListener(this, activity).setImageButtonsListeners();
         ProphecyUtils.readProphecies(this);
         new CookieUtils(this, activity).setCookiesByCategories();
+    }
+
+    public void hideScreenObjects() {
         new CookieView(this, activity).hideCookies();
         new CookieView(this, activity).hideFinalCookies();
         new CookieView(this, activity).hideButtons();
         new CookieView(this, activity).hideProphecy();
         new CookieView(this, activity).setFont();
-        new ProphecyUtils(this, activity).checkProphecyAlreadyGot();
-        new ButtonListener(this, activity).setImageButtonsListeners();
     }
 
     private Integer getCookieBackground(int backGroundId){

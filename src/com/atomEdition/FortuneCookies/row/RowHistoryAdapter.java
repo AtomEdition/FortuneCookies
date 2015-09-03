@@ -12,7 +12,7 @@ import com.atomEdition.FortuneCookies.R;
 import com.atomEdition.FortuneCookies.model.Prophecy;
 import com.atomEdition.FortuneCookies.services.CookieUtils;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by FruityDevil on 29.12.2014.
@@ -22,9 +22,9 @@ public class RowHistoryAdapter extends BaseAdapter {
     private static LayoutInflater layoutInflater = null;
     Context context;
     Activity activity;
-    LinkedList<Prophecy> data;
+    List<Prophecy> data;
 
-    public RowHistoryAdapter(Context context, Activity activity, LinkedList<Prophecy> data){
+    public RowHistoryAdapter(Context context, Activity activity, List<Prophecy> data) {
         this.context = context;
         this.activity = activity;
         this.data = data;

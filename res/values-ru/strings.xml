@@ -9,7 +9,7 @@
     <string name="calibrate_start">Потряси устройство для калибровки или нажми на экран, чтобы выбрать значения по умолчанию</string>
     <string name="calibrate_success">Калибровка завершена! Потряси еще, чтобы получить печеньки</string>
     <string name="connection_failure">Что-то не так! Проверьте ваше подключение к Интернету</string>
-    <string name="cookies_ready">Новые печеньки ждут!</string>
+    <string name="cookies_ready">Вытряси новые печеньки!</string>
     <string name="button_back">Назад</string>
     <!--> SETTINGS <-->
     <string name="settings_calibrate">Калибровка</string>
@@ -30,7 +30,10 @@
     <string name="about_text_3">Любовные предсказания</string>
     <string name="about_text_4">Предсказания об успехе</string>
     <string name="about_text_5">Здоровые предсказания</string>
-    <string name="about_text_6">Вульгарные предсказания</string>
+    <string name="about_text_6">Пошлые предсказания</string>
+    <!-- VIDEO -->
+    <string name="video_available">Посмотри видео, чтобы получить еще одно предсказание!</string>
+    <string name="video_already_watched">Недоступно! Возвращайся позже</string>
     <!--> ДЕНЬГИ <-->
     <string-array name="prophecies_1">
         <item>Сегодня хороший день, чтобы потратить деньги.</item>

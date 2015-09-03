@@ -22,7 +22,12 @@ public class CookieView extends ContextWrapper {
         this.activity = activity;
     }
 
-    public void setUnClickable(int id){
+    public void setClickable(int id) {
+        View view = this.activity.findViewById(id);
+        view.setClickable(true);
+    }
+
+    public void setUnclickable(int id) {
         View view = this.activity.findViewById(id);
         view.setClickable(false);
     }
@@ -59,11 +64,11 @@ public class CookieView extends ContextWrapper {
         makeClearAndInvisible(R.id.cookie_half_left);
         makeClearAndInvisible(R.id.cookie_half_right);
         makeClearAndInvisible(R.id.image_crumbs);
-        setUnClickable(R.id.prophecy_layout);
+        setUnclickable(R.id.prophecy_image);
     }
 
     public void hideProphecy(){
-        clearBackground(R.id.prophecy);
+        clearBackground(R.id.prophecy_image);
         clearText(R.id.prophecy_text);
         makeClearAndInvisible(R.id.prophecy_layout);
     }
@@ -72,6 +77,7 @@ public class CookieView extends ContextWrapper {
         makeClearAndInvisible(R.id.button_history);
         makeClearAndInvisible(R.id.button_settings);
         makeClearAndInvisible(R.id.button_follow);
+        makeClearAndInvisible(R.id.button_video);
         makeClearAndInvisible(R.id.text_cooldown);
     }
 
@@ -79,6 +85,7 @@ public class CookieView extends ContextWrapper {
         makeVisible(R.id.button_history);
         makeVisible(R.id.button_settings);
         makeVisible(R.id.button_follow);
+        makeVisible(R.id.button_video);
         makeVisible(R.id.text_cooldown);
     }
 

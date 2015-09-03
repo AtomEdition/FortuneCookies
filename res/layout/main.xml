@@ -50,7 +50,7 @@
                 android:layout_alignParentLeft="false" android:layout_alignParentRight="false"
                 android:layout_centerInParent="true">
             <ImageButton android:layout_width="@dimen/prophecy_image_size" android:layout_height="@dimen/prophecy_image_size_half"
-                         android:id="@id/prophecy" android:onClick="onProphecyClick"
+                         android:id="@id/prophecy_image" android:onClick="onProphecyClick"
                          android:visibility="visible" android:layout_gravity="center_horizontal"
                          android:layout_marginTop="@dimen/prophecy_image_margin_top"/>
             <TextView
@@ -90,12 +90,20 @@
                      android:background="@drawable/follow"
                      android:layout_toLeftOf="@id/button_settings" android:layout_alignParentBottom="true"
                      android:onClick="onClickOther"/>
+        <ImageButton android:layout_width="@dimen/button_history_size"
+                     android:layout_height="@dimen/button_history_size"
+                     android:background="@drawable/video"
+                     android:onClick="onWatchVideoClick"
+                     android:layout_marginRight="@dimen/button_history_margin"
+                     android:layout_marginBottom="@dimen/button_history_margin"
+                     android:layout_toLeftOf="@id/button_follow" android:layout_alignParentBottom="true"
+                     android:id="@+id/button_video" android:scaleType="centerInside"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sake"
                 android:id="@+id/button" android:layout_alignParentTop="true" android:layout_toRightOf="@id/cookie_0"
-                android:onClick="onButtonClick" android:visibility="invisible"/>
+                android:onClick="onButtonTestClick" android:visibility="invisible"/>
     </RelativeLayout>
     <ImageView
             android:layout_width="match_parent"

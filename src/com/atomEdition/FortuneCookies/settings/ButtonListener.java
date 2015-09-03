@@ -17,6 +17,7 @@ import com.atomEdition.FortuneCookies.services.ProphecyUtils;
  */
 public class ButtonListener extends ContextWrapper {
 
+    private static final int MAX_DISTANCE_WHERE_HALVES_MOVE_OUT_ALLOWED = 250;
     Activity activity;
     private float touchX, touchY;
 
@@ -35,7 +36,7 @@ public class ButtonListener extends ContextWrapper {
                     touchY = motionEvent.getY();
                 }
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    if((motionEvent.getX()<touchX)&&(Utils.isNear(touchY, motionEvent.getY(), 200))){
+                    if ((motionEvent.getX() < touchX) && (Utils.isNear(touchY, motionEvent.getY(), MAX_DISTANCE_WHERE_HALVES_MOVE_OUT_ALLOWED))) {
                         ImageButton imageButtonHalfLeft = (ImageButton)activity.findViewById(R.id.cookie_half_left);
                         new CookieAnimation(ButtonListener.this).animationMoveOutLeft(imageButtonHalfLeft);
                         CookieUtils.halfCount--;
@@ -54,7 +55,7 @@ public class ButtonListener extends ContextWrapper {
                     touchY = motionEvent.getY();
                 }
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    if((motionEvent.getX()>touchX)&&(Utils.isNear(touchY, motionEvent.getY(), 200))){
+                    if ((motionEvent.getX() > touchX) && (Utils.isNear(touchY, motionEvent.getY(), MAX_DISTANCE_WHERE_HALVES_MOVE_OUT_ALLOWED))) {
                         ImageButton imageButtonHalfRight = (ImageButton)activity.findViewById(R.id.cookie_half_right);
                         new CookieAnimation(ButtonListener.this).animationMoveOutRight(imageButtonHalfRight);
                         CookieUtils.halfCount--;
