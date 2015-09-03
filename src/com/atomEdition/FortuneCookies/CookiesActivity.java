@@ -27,15 +27,29 @@ import com.atomEdition.FortuneCookies.widget.CookieWidget;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.vungle.publisher.VunglePub;
 
 import java.util.Date;
 
 public class CookiesActivity extends Activity implements SensorEventListener {
 
+    private final VunglePub vunglePub = VunglePub.getInstance();
+    private final String vungleAppId = "com.atomEdition.FortuneCookies";
     private InterstitialAd interstitialAd;
     private ActivityUtils activityUtils;
 
-    private void initialization(){
+    /**
+     * Called when the activity is first created.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        new LayoutView(this, this).toCalibrateLayout();
+        initialization();
+        vunglePub.init(this, vungleAppId);
+    }
+
+    private void initialization() {
         ActivityUtils.activity = this;
         setActivityUtils(new ActivityUtils(this));
         new Accelerometer(this).setSensors();
@@ -46,23 +60,22 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         new Accelerometer(this).loadCalibration();
         new TutorialView(this, this).checkIsTutorialNeeded();
         sendBroadcast(CookieWidget.updateWidget(getApplicationContext(), getApplication()));
-        if(Utils.SHAKE_THRESHOLD == 0d){
+        if (Utils.SHAKE_THRESHOLD == 0d) {
             ActivityUtils.toastCustomBottom.showText(getString(R.string.calibrate_start), Toast.LENGTH_LONG);
             new LayoutView(this, this).toCalibrateLayout();
         }
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
-            setAd();
-        displayInterstitial();
+        showBanner();
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         new Accelerometer(this).registerSensorListener(this);
+        vunglePub.onResume();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         try {
             new Accelerometer(this).unRegisterSensorListener(this);
             ActivityUtils.toastCustomBottom.cancel();
@@ -70,20 +83,11 @@ public class CookiesActivity extends Activity implements SensorEventListener {
             e.printStackTrace();
         }
         super.onPause();
-    }
-
-    /**
-     * Called when the activity is first created.
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        new LayoutView(this, this).toCalibrateLayout();
-        initialization();
+        vunglePub.onPause();
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         if (ActivityUtils.toastCustomTop != null) {
             ActivityUtils.toastCustomTop.cancel();
         }
@@ -94,28 +98,28 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     @Override
-    public void onSensorChanged(SensorEvent sensorEvent){
-        if(Utils.SHAKE_THRESHOLD == 0d)
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (Utils.SHAKE_THRESHOLD == 0d)
             new Accelerometer(this).calibrate(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
-        else if(sensorEvent.sensor.getType() == SensorManager.SENSOR_DELAY_GAME){
-            if(new Accelerometer(this).isShakeEnough(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2])){
+        else if (sensorEvent.sensor.getType() == SensorManager.SENSOR_DELAY_GAME) {
+            if (new Accelerometer(this).isShakeEnough(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2])) {
                 onShake();
             }
         }
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int i){
+    public void onAccuracyChanged(Sensor sensor, int i) {
         // Must be overridden.
     }
 
-    private void onShake(){
-        if(!CookieUtils.isCookiesPlaced){
+    private void onShake() {
+        if (!CookieUtils.isCookiesPlaced) {
             if (!ActivityUtils.flagTicking) {
                 new TutorialView(this, this).checkAndShow(R.string.tutorial_choose);
                 ActivityUtils.countDownTimer.start();
             }
-            ImageButton imageButton = (ImageButton)findViewById(new GetUtils(this).getCookie
+            ImageButton imageButton = (ImageButton) findViewById(new GetUtils(this).getCookie
                     (ActivityUtils.cookiesOnTableAvailable));
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams
                     (new ActivityUtils(this).convertToPx(Utils.COOKIE_SIZE),
@@ -131,38 +135,38 @@ public class CookiesActivity extends Activity implements SensorEventListener {
             imageButton.startAnimation(animation);
             imageButton.setVisibility(View.VISIBLE);
             ActivityUtils.cookiesOnTableAvailable--;
-            if(ActivityUtils.cookiesOnTableAvailable < 0)
+            if (ActivityUtils.cookiesOnTableAvailable < 0)
                 CookieUtils.isCookiesPlaced = true;
             ActivityUtils.vibrator.vibrate(Utils.VIBRATE_FALL_TIME);
         }
     }
 
-    private void moveCookiesOut(int exceptValue){
-        for(int i=0; i<Utils.COOKIES_COUNT; i++){
-            if(new GetUtils(this).getCookie(i)!=exceptValue){
-                ImageButton imageButton = (ImageButton)findViewById(new GetUtils(this).getCookie(i));
-                if(imageButton.getVisibility()==View.VISIBLE)
+    private void moveCookiesOut(int exceptValue) {
+        for (int i = 0; i < Utils.COOKIES_COUNT; i++) {
+            if (new GetUtils(this).getCookie(i) != exceptValue) {
+                ImageButton imageButton = (ImageButton) findViewById(new GetUtils(this).getCookie(i));
+                if (imageButton.getVisibility() == View.VISIBLE)
                     imageButton.startAnimation(new CookieAnimation(CookiesActivity.this).getMoveOutAnimation(findViewById(new GetUtils(this).getCookie(i))));
             }
         }
     }
 
-    public void onCookieClick(View view){
+    public void onCookieClick(View view) {
         int categoryId = new CookieUtils(this, this).getCategoryId(view.getId());
         ActivityUtils.stopCountDownTimer();
         Utils.PROPHECIES.add(new Prophecy(new Date(), new ProphecyUtils(this, this).getProphecy(categoryId), categoryId));
         moveCookiesOut(view.getId());
-        ImageButton imageButtonFinal = (ImageButton)findViewById(R.id.cookie_final);
+        ImageButton imageButtonFinal = (ImageButton) findViewById(R.id.cookie_final);
         view.startAnimation(new CookieAnimation(CookiesActivity.this).getMoveToCenterAnimation(view, imageButtonFinal));
         new CookieUtils(this, this).setCookieFinalCategory(categoryId);
     }
 
-    public void onCookieFinalClick(View view){
+    public void onCookieFinalClick(View view) {
         new CookieView(this, this).makeClearAndInvisible(view.getId());
         new CookieView(this, this).makeVisible(R.id.cookie_half_left);
         new CookieView(this, this).makeVisible(R.id.cookie_half_right);
         new CookieView(this, this).makeVisible(R.id.image_crumbs);
-        ImageView imageView = (ImageView)findViewById(R.id.image_crumbs);
+        ImageView imageView = (ImageView) findViewById(R.id.image_crumbs);
         imageView.startAnimation(new CookieAnimation(this).animationCrumbs());
         new TutorialView(this, this).checkAndShow(R.string.tutorial_move_out);
         new CookieAnimation(this).setProphecyIdleAnimation();
@@ -170,7 +174,7 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         new CookieView(this, this).makeVisible(R.id.prophecy_layout);
     }
 
-    public void onProphecyClick(View view){
+    public void onProphecyClick(View view) {
         if (!ActivityUtils.flagCooldown) {
             new ProphecyUtils(this, this).updateProphecies();
             sendBroadcast(CookieWidget.updateWidget(getApplicationContext(), getApplication()));
@@ -185,7 +189,7 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         Animation scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.prophecy_zoom);
         scaleAnimation.setDuration(Utils.ANIMATION_PROPHECY_DURATION);
         scaleAnimation.setFillAfter(true);
-        FrameLayout frameLayout = (FrameLayout)findViewById(R.id.prophecy_layout);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.prophecy_layout);
         frameLayout.startAnimation(scaleAnimation);
         ActivityUtils.coolDownTimer.start();
         ActivityUtils.setFlagCooldown(true);
@@ -194,16 +198,16 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         }
     }
 
-    public void onButtonHistoryClick(View view){
+    public void onButtonHistoryClick(View view) {
         setContentView(R.layout.history);
         new ActivityUtils(this).setListHistory();
     }
 
-    public void onButtonSettingsClick(View view){
+    public void onButtonSettingsClick(View view) {
         setContentView(R.layout.settings);
     }
 
-    public void backToMenu(View view){
+    public void backToMenu(View view) {
         new LayoutView(this, this).toMainLayout();
         new CookieUtils(this, this).prepareCookies();
         new ButtonListener(this, this).setImageButtonsListeners();
@@ -215,20 +219,20 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         finish();
     }
 
-    public void onCalibrateLayoutClick(View view){
+    public void onCalibrateLayoutClick(View view) {
         new Accelerometer(this).setCalibration(Utils.SHAKE_THRESHOLD_DEFAULT);
         new LayoutView(this, this).toMainLayout();
         new CookieUtils(this, this).prepareCookies();
-        if(!CookieUtils.isCookiesPlaced)
+        if (!CookieUtils.isCookiesPlaced)
             ActivityUtils.toastCustomBottom.showText(getResources().getString(R.string.tutorial_shake), Toast.LENGTH_SHORT);
     }
 
-    public void onSettingsCalibrateClick(View view){
+    public void onSettingsCalibrateClick(View view) {
         new LayoutView(this, this).toCalibrateLayout();
         ActivityUtils.toastCustomBottom.showText(getResources().getString(R.string.calibrate_start), Toast.LENGTH_LONG);
     }
 
-    public void onSettingsAboutClick(View view){
+    public void onSettingsAboutClick(View view) {
         setContentView(R.layout.about);
         AboutService aboutService = new AboutService(this);
         for (int i = 0; i < Utils.PROPHECY_CATEGORIES_COUNT_TOTAL; i++) {
@@ -239,8 +243,16 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     public void onWatchVideoClick(View view) {
-        if (getActivityUtils().isVideoCanBeShown()) {
-            getActivityUtils().dropCoolDown();
+        if (getActivityUtils().isVideoCanBeShown()
+                && Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
+            try {
+                vunglePub.playAd();
+                getActivityUtils().dropCoolDown();
+            } catch (Exception e) {
+                ActivityUtils.toastCustomTop.showText(getString(R.string.connection_failure), Toast.LENGTH_SHORT);
+            }
+        } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+            getActivityUtils().showTextWithToast(getString(R.string.video_error));
         } else {
             getActivityUtils().showTextWithToast(getString(R.string.video_already_watched));
         }
@@ -250,7 +262,14 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         onShake();
     }
 
-    public void setAd(){
+    public void showBanner() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
+            setAd();
+            displayInterstitial();
+        }
+    }
+
+    public void setAd() {
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-9550981282535152/8759177420");
         AdRequest adRequest = new AdRequest.Builder()

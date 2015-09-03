@@ -34,6 +34,7 @@
     <!-- VIDEO -->
     <string name="video_available">Посмотри видео, чтобы получить еще одно предсказание!</string>
     <string name="video_already_watched">Недоступно! Возвращайся позже</string>
+    <string name="video_error">Ошибка загрузки видео!</string>
     <!--> ДЕНЬГИ <-->
     <string-array name="prophecies_1">
         <item>Сегодня хороший день, чтобы потратить деньги.</item>
