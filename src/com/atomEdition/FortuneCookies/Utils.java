@@ -40,7 +40,10 @@ public abstract class Utils {
     public static final Integer ANIMATION_MOVE_OUT_SIDES_DURATION = 500;
     public static final Integer ANIMATION_PROPHECY_DURATION = 400;
     public static final Integer ANIMATION_CRUMBS_DURATION = 150;
+
     public static final Long COOLDOWN = (1000L * 60 * 60) * 4;
+    public static final Long COOLDOWN_BANNER = (1000L * 60 * 60) * 12;
+
     public static final Integer COOKIES_COUNT = 5;
     public static final String COOKIE_NAME = "cookie_";
     public static final String COOKIE_HALF_LEFT_NAME = "cookie_half_left_";

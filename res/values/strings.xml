@@ -33,7 +33,7 @@
     <string name="about_text_6">Vulgar prophecies</string>
     <!-- VIDEO -->
     <string name="video_available">You can watch video to drop cooldown on cookies right now!</string>
-    <string name="video_already_watched">Unavailable! Come back later</string>
+    <string name="video_already_watched">Come back later, cowboy! :)</string>
     <string name="video_error">Error while loading video</string>
     <!--> MONEY <-->
     <string-array name="prophecies_1">

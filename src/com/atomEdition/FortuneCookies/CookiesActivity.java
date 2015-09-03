@@ -252,9 +252,9 @@ public class CookiesActivity extends Activity implements SensorEventListener {
                 ActivityUtils.toastCustomTop.showText(getString(R.string.connection_failure), Toast.LENGTH_SHORT);
             }
         } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
-            getActivityUtils().showTextWithToast(getString(R.string.video_error));
+            ActivityUtils.toastCustomTop.showText(getString(R.string.video_error), Toast.LENGTH_SHORT);
         } else {
-            getActivityUtils().showTextWithToast(getString(R.string.video_already_watched));
+            ActivityUtils.toastCustomTop.showText(getString(R.string.video_already_watched), Toast.LENGTH_SHORT);
         }
     }
 
@@ -278,14 +278,18 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     public void displayInterstitial() {
-        if (interstitialAd.isLoaded()) {
+        if (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() > Utils.COOLDOWN_BANNER) {
             interstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    interstitialAd.show();
+                }
+
                 @Override
                 public void onAdClosed() {
                     super.onAdClosed();
                 }
             });
-            interstitialAd.show();
         }
     }
 
