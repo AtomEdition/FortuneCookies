@@ -3,6 +3,8 @@ package com.atomEdition.FortuneCookies.services;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.Display;
@@ -15,6 +17,7 @@ import com.atomEdition.FortuneCookies.Utils;
 import com.atomEdition.FortuneCookies.row.RowHistoryAdapter;
 import com.atomEdition.FortuneCookies.toast.ToastCustom;
 
+import java.net.ConnectException;
 import java.util.Date;
 
 /**
@@ -144,5 +147,13 @@ public class ActivityUtils extends ContextWrapper {
                 || (Utils.PROPHECIES.get(Utils.PROPHECIES.size() - 1).getDate().getTime()
                 - Utils.PROPHECIES.get(Utils.PROPHECIES.size() - 2).getDate().getTime()
                 > Utils.COOLDOWN);
+    }
+    public boolean isNetworkConnected() throws ConnectException{
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if (ni == null) {
+            throw new ConnectException("Error");
+        };
+        return true;
     }
 }

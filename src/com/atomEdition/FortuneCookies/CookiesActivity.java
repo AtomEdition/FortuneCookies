@@ -29,6 +29,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.vungle.publisher.VunglePub;
 
+import java.net.ConnectException;
 import java.util.Date;
 
 public class CookiesActivity extends Activity implements SensorEventListener {
@@ -243,18 +244,23 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     public void onWatchVideoClick(View view) {
-        if (getActivityUtils().isVideoCanBeShown()
-                && Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
-            try {
-                vunglePub.playAd();
-                getActivityUtils().dropCoolDown();
-            } catch (Exception e) {
-                ActivityUtils.toastCustomTop.showText(getString(R.string.connection_failure), Toast.LENGTH_SHORT);
+        try {
+            if (getActivityUtils().isVideoCanBeShown()
+                    && Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO
+                    && getActivityUtils().isNetworkConnected()) {
+                try {
+                    vunglePub.playAd();
+                    getActivityUtils().dropCoolDown();
+                } catch (Exception e) {
+                    ActivityUtils.toastCustomTop.showText(getString(R.string.connection_failure), Toast.LENGTH_SHORT);
+                }
+            } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+                ActivityUtils.toastCustomTop.showText(getString(R.string.video_error), Toast.LENGTH_SHORT);
+            } else {
+                ActivityUtils.toastCustomTop.showText(getString(R.string.video_already_watched), Toast.LENGTH_SHORT);
             }
-        } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.FROYO) {
+        } catch (ConnectException e) {
             ActivityUtils.toastCustomTop.showText(getString(R.string.video_error), Toast.LENGTH_SHORT);
-        } else {
-            ActivityUtils.toastCustomTop.showText(getString(R.string.video_already_watched), Toast.LENGTH_SHORT);
         }
     }
 
@@ -278,18 +284,20 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     public void displayInterstitial() {
-        if (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() > Utils.COOLDOWN_BANNER) {
-            interstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    interstitialAd.show();
-                }
+        if (Utils.PROPHECIES.size() > 0) {
+            if (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() > Utils.COOLDOWN_BANNER) {
+                interstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdLoaded() {
+                        interstitialAd.show();
+                    }
 
-                @Override
-                public void onAdClosed() {
-                    super.onAdClosed();
-                }
-            });
+                    @Override
+                    public void onAdClosed() {
+                        super.onAdClosed();
+                    }
+                });
+            }
         }
     }
 
