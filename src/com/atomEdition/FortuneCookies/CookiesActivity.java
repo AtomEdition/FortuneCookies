@@ -40,7 +40,9 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     private ActivityUtils activityUtils;
 
     /**
+     *
      * Called when the activity is first created.
+     *
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
