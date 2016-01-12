@@ -1,0 +1,6 @@
+.sonar
+.idea
+out
+*.iml
+gen
+sonar-project.properties
