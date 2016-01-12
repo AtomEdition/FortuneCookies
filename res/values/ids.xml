@@ -60,4 +60,6 @@
     <item name="button_follow_instagram" type="id">618</item>
     <item name="button_follow_google_play" type="id">619</item>
     <!---->
+    <!--PROMOTION IDS-->
+    <item name="promotion_button" type="id">59</item>
 </resources>

@@ -13,10 +13,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.*;
+import com.atomEdition.FortuneCookies.ad.AdService;
 import com.atomEdition.FortuneCookies.animation.CookieAnimation;
 import com.atomEdition.FortuneCookies.model.Position;
 import com.atomEdition.FortuneCookies.model.Prophecy;
 import com.atomEdition.FortuneCookies.promotion.FollowActivity;
+import com.atomEdition.FortuneCookies.promotion.PromotionButtonController;
 import com.atomEdition.FortuneCookies.services.*;
 import com.atomEdition.FortuneCookies.settings.Accelerometer;
 import com.atomEdition.FortuneCookies.settings.ButtonListener;
@@ -36,7 +38,6 @@ public class CookiesActivity extends Activity implements SensorEventListener {
 
     private final VunglePub vunglePub = VunglePub.getInstance();
     private final String vungleAppId = "com.atomEdition.FortuneCookies";
-    private InterstitialAd interstitialAd;
     private ActivityUtils activityUtils;
 
     /**
@@ -66,8 +67,20 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         if (Utils.SHAKE_THRESHOLD == 0d) {
             ActivityUtils.toastCustomBottom.showText(getString(R.string.calibrate_start), Toast.LENGTH_LONG);
             new LayoutView(this, this).toCalibrateLayout();
+        } else {
+            adInitialization();
+            PromotionButtonController.getInstance(this).startTimer();
         }
-        showBanner();
+    }
+
+    private void adInitialization(){
+        AdService adService = AdService.getInstance();
+        adService.showBanner(this);
+        if (Utils.PROPHECIES.size() > 0 &&
+                new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() > Utils.COOLDOWN_BANNER &&
+                Utils.PROPHECIES.size() > 0) {
+            adService.loadInterstitialAndShow(this);
+        }
     }
 
     @Override
@@ -199,14 +212,17 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         if (getActivityUtils().isVideoCanBeShown()) {
             ActivityUtils.toastCustomTop.showText(getString(R.string.video_available), Toast.LENGTH_LONG);
         }
+        PromotionButtonController.getInstance(this).startTimer();
     }
 
     public void onButtonHistoryClick(View view) {
+        PromotionButtonController.getInstance(this).breakTimer();
         setContentView(R.layout.history);
         new ActivityUtils(this).setListHistory();
     }
 
     public void onButtonSettingsClick(View view) {
+        PromotionButtonController.getInstance(this).breakTimer();
         setContentView(R.layout.settings);
     }
 
@@ -214,12 +230,17 @@ public class CookiesActivity extends Activity implements SensorEventListener {
         new LayoutView(this, this).toMainLayout();
         new CookieUtils(this, this).prepareCookies();
         new ButtonListener(this, this).setImageButtonsListeners();
+        PromotionButtonController.getInstance(this).startTimer();
     }
 
     public void onClickOther(View view) {
         Intent intent = new Intent(this, FollowActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void onPromotionClick(View view) {
+        PromotionButtonController.getInstance(this).makeUsFamous();
     }
 
     public void onCalibrateLayoutClick(View view) {
@@ -231,6 +252,7 @@ public class CookiesActivity extends Activity implements SensorEventListener {
     }
 
     public void onSettingsCalibrateClick(View view) {
+        PromotionButtonController.getInstance(this).breakTimer();
         new LayoutView(this, this).toCalibrateLayout();
         ActivityUtils.toastCustomBottom.showText(getResources().getString(R.string.calibrate_start), Toast.LENGTH_LONG);
     }
@@ -268,39 +290,6 @@ public class CookiesActivity extends Activity implements SensorEventListener {
 
     public void onButtonTestClick(View view) {
         onShake();
-    }
-
-    public void showBanner() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
-            setAd();
-            displayInterstitial();
-        }
-    }
-
-    public void setAd() {
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-9550981282535152/8759177420");
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        interstitialAd.loadAd(adRequest);
-    }
-
-    public void displayInterstitial() {
-        if (Utils.PROPHECIES.size() > 0) {
-            if (new Date().getTime() - Utils.PROPHECIES.getLast().getDate().getTime() > Utils.COOLDOWN_BANNER) {
-                interstitialAd.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdLoaded() {
-                        interstitialAd.show();
-                    }
-
-                    @Override
-                    public void onAdClosed() {
-                        super.onAdClosed();
-                    }
-                });
-            }
-        }
     }
 
     public ActivityUtils getActivityUtils() {

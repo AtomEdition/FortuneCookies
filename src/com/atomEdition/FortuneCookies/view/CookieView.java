@@ -79,6 +79,7 @@ public class CookieView extends ContextWrapper {
         makeClearAndInvisible(R.id.button_follow);
         makeClearAndInvisible(R.id.button_video);
         makeClearAndInvisible(R.id.text_cooldown);
+        makeClearAndInvisible(R.id.promotion_button);
     }
 
     public void showButtons(){
@@ -87,6 +88,7 @@ public class CookieView extends ContextWrapper {
         makeVisible(R.id.button_follow);
         makeVisible(R.id.button_video);
         makeVisible(R.id.text_cooldown);
+        makeVisible(R.id.promotion_button);
     }
 
     public void setFont(){

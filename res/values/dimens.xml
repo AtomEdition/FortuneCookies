@@ -36,4 +36,6 @@
     <dimen name="follow_icon_margin">8dp</dimen>
     <dimen name="follow_button_back_text_size">20sp</dimen>
     <dimen name="follow_button_back_margin">20sp</dimen>
+    <dimen name="promotion_button_size">100dp</dimen>
+    <dimen name="promotion_button_margin">30dp</dimen>
 </resources>

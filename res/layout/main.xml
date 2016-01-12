@@ -4,6 +4,16 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_main_margin"
+            android:id="@+id/border_top" android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+            android:background="@drawable/border"/>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_main_margin"
+            android:id="@+id/border_bottom"
+            android:background="@drawable/border" android:layout_alignParentBottom="true"/>
     <RelativeLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -105,15 +115,32 @@
                 android:id="@+id/button" android:layout_alignParentTop="true" android:layout_toRightOf="@id/cookie_0"
                 android:onClick="onButtonTestClick" android:visibility="invisible"/>
     </RelativeLayout>
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_main_margin"
-            android:id="@+id/border_top" android:layout_alignParentTop="true" android:layout_alignParentRight="true"
-            android:background="@drawable/border"/>
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_main_margin"
-            android:id="@+id/border_bottom"
-            android:background="@drawable/border" android:layout_alignParentBottom="true"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:ads="http://schemas.android.com/apk/res-auto"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:orientation="vertical"
+                  android:gravity="top">
+
+        <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="ca-app-pub-9550981282535152/4060236623" />
+
+    </LinearLayout>
+
+    <ImageButton android:layout_width="@dimen/promotion_button_size"
+                 android:layout_height="@dimen/promotion_button_size"
+                 android:id="@+id/promotion_button"
+                 android:onClick="onPromotionClick"
+                 android:background="@drawable/promotion_adopt"
+                 android:layout_gravity="left|bottom"
+                 android:layout_marginLeft="@dimen/promotion_button_margin"
+                 android:layout_marginTop="@dimen/promotion_button_margin"
+                 android:layout_alignParentTop="true"
+                 android:layout_alignParentLeft="true"/>
 </RelativeLayout>
 
